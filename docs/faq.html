@@ -51,10 +51,294 @@
             </ul>
         </nav>
     </header>
-    <div class="docs-container" style="text-align: center; padding: 4rem 0;">
-        <h1>PAGE_TITLE</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">Full documentation available on GitHub</p>
-        <a href="GITHUB_URL" class="button primary" target="_blank">View on GitHub →</a>
+    <div class="docs-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Common questions about the Causal Attribution API</p>
+        </div>
     </div>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h2>General Questions</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>What is causal attribution?</h4>
+                <p>Causal attribution uses advanced statistical methods to determine which marketing touchpoints actually <em>caused</em> a conversion, rather than just correlating with it. Unlike traditional attribution models that assign credit based on rules or heuristics, causal attribution uses scientific methods like the PC Algorithm, Propensity Score Matching, and Doubly Robust Estimation to discover true cause-and-effect relationships.</p>
+
+                <h4>How is this different from Google Analytics attribution?</h4>
+                <p>Google Analytics uses rule-based and data-driven attribution models that rely on correlation patterns. Our API uses causal inference techniques from academic research to identify true causal relationships, accounting for confounding variables and selection bias. This provides more accurate ROI measurements and better budget allocation decisions.</p>
+
+                <h4>Do I need a data science background to use this API?</h4>
+                <p>No! While the underlying methods are sophisticated, the API is designed to be simple to use. You send touchpoint and conversion data via JSON, and receive easy-to-interpret attribution scores and ROI metrics. We also provide examples in multiple programming languages and AI agent integrations for natural language queries.</p>
+
+                <h4>Is this suitable for small businesses?</h4>
+                <p>Absolutely! Our Starter plan at $99/month is designed for small businesses and startups. You get access to the same scientifically rigorous attribution models used by enterprise companies, at a fraction of the cost of competitors.</p>
+            </div>
+
+            <h2>Pricing & Plans</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>How much does the API cost?</h4>
+                <p>We offer four pricing tiers:</p>
+                <ul>
+                    <li><strong>Starter:</strong> $99/month - 50,000 touchpoints, 1,000 API calls</li>
+                    <li><strong>Professional:</strong> $299/month - 250,000 touchpoints, 5,000 API calls</li>
+                    <li><strong>Business:</strong> $799/month - 1,000,000 touchpoints, 20,000 API calls</li>
+                    <li><strong>Enterprise:</strong> Starting at $1,500/month - Unlimited touchpoints and custom features</li>
+                </ul>
+                <p>All plans include all attribution models and our 99.9% uptime SLA. See our <a href="pricing.html">pricing page</a> for full details.</p>
+
+                <h4>Is there a free trial?</h4>
+                <p>Yes! We offer a 14-day free trial on all plans with no credit card required. Contact us at <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a> to start your trial.</p>
+
+                <h4>Can I change plans later?</h4>
+                <p>Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle. If you exceed your plan limits, we'll notify you before any automatic upgrade occurs.</p>
+
+                <h4>Do you offer annual billing?</h4>
+                <p>Yes! Annual billing comes with a 15% discount. Contact sales at <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a> for annual pricing.</p>
+
+                <h4>What happens if I exceed my plan limits?</h4>
+                <p>If you exceed your monthly touchpoint or API call limit, we'll send you a notification and automatically upgrade you to the next tier for that month. You'll receive the notification before any charges occur.</p>
+
+                <h4>Do you offer discounts?</h4>
+                <p>Yes! We offer:</p>
+                <ul>
+                    <li>15% discount for annual billing</li>
+                    <li>25% discount for qualified nonprofits and educational institutions</li>
+                    <li>Custom pricing for enterprise and multi-year contracts</li>
+                </ul>
+
+                <h4>What's your refund policy?</h4>
+                <p>We offer a 30-day money-back guarantee on all plans. If you're not satisfied with the API, we'll refund your first month's payment in full, no questions asked.</p>
+            </div>
+
+            <h2>Technical Questions</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>What programming languages can I use?</h4>
+                <p>Our REST API works with any programming language that can make HTTP requests. We provide code examples in Python, JavaScript, PHP, Ruby, R, and cURL. Check our <a href="examples.html">examples page</a> for copy-paste ready code.</p>
+
+                <h4>How fast is the API?</h4>
+                <p>The API processes up to 100,000 touchpoints in under 5 seconds. Most requests with typical customer journeys (3-10 touchpoints) return results in less than 1 second.</p>
+
+                <h4>What's the API uptime?</h4>
+                <p>We guarantee 99.9% uptime on all plans, with 99.99% uptime SLA available for Enterprise customers. Our infrastructure is hosted on enterprise-grade cloud providers with redundancy and automatic failover.</p>
+
+                <h4>How do I authenticate?</h4>
+                <p>Authentication uses API keys sent in the request header. Include your API key as a Bearer token:</p>
+                <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+
+                <h4>Is there rate limiting?</h4>
+                <p>Yes, rate limits are based on your plan:</p>
+                <ul>
+                    <li><strong>Starter:</strong> 1,000 API calls/month, 10 requests/minute</li>
+                    <li><strong>Professional:</strong> 5,000 API calls/month, 50 requests/minute</li>
+                    <li><strong>Business:</strong> 20,000 API calls/month, 200 requests/minute</li>
+                    <li><strong>Enterprise:</strong> Unlimited with custom rate limits</li>
+                </ul>
+
+                <h4>Can I batch multiple requests?</h4>
+                <p>Yes! Use the batch endpoint to analyze multiple customer journeys in a single API call. This is more efficient and counts as one API call regardless of the number of journeys (up to 100 per batch).</p>
+
+                <h4>What data format does the API use?</h4>
+                <p>The API accepts and returns JSON. Timestamps should be in ISO 8601 format (e.g., "2025-01-01T10:00:00Z").</p>
+
+                <h4>Can I integrate with AI agents like ChatGPT?</h4>
+                <p>Yes! We provide examples for OpenAI GPT-4 function calling, Anthropic Claude tool use, and LangChain integration. See our <a href="agentic-ai.html">AI integration guide</a> for details.</p>
+            </div>
+
+            <h2>Data & Privacy</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>What data do you store?</h4>
+                <p>We only store aggregated analytics about API usage (request counts, response times, error rates). We do NOT store your touchpoint or conversion data. All customer journey data is processed in memory and discarded after returning results.</p>
+
+                <h4>Is my data secure?</h4>
+                <p>Yes. All API requests use HTTPS encryption. We follow industry best practices for security, including:</p>
+                <ul>
+                    <li>TLS 1.3 encryption for all data in transit</li>
+                    <li>API key rotation capabilities</li>
+                    <li>No persistent storage of customer data</li>
+                    <li>Regular security audits and penetration testing</li>
+                </ul>
+
+                <h4>Are you GDPR compliant?</h4>
+                <p>Yes. Since we don't store customer data, GDPR compliance is straightforward. We process data only as needed to return attribution results, then immediately discard it.</p>
+
+                <h4>Can I use anonymized user IDs?</h4>
+                <p>Yes! The user_id field can be any string identifier. We recommend using anonymized or hashed IDs for additional privacy protection.</p>
+            </div>
+
+            <h2>Attribution Models</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>What attribution models are available?</h4>
+                <p>We offer 7+ attribution models:</p>
+                <ul>
+                    <li><strong>data_driven</strong> - Our proprietary causal inference model (recommended)</li>
+                    <li><strong>shapley</strong> - Shapley Value attribution from game theory</li>
+                    <li><strong>first_touch</strong> - All credit to first touchpoint</li>
+                    <li><strong>last_touch</strong> - All credit to last touchpoint</li>
+                    <li><strong>linear</strong> - Equal credit to all touchpoints</li>
+                    <li><strong>time_decay</strong> - More credit to recent touchpoints</li>
+                    <li><strong>position_based</strong> - 40% first, 40% last, 20% middle touchpoints</li>
+                </ul>
+
+                <h4>Which model should I use?</h4>
+                <p>We recommend starting with the <strong>data_driven</strong> model, which uses causal inference to discover true cause-and-effect relationships. For comparison purposes, you can also run <strong>shapley</strong> or traditional models to see how much they differ from causal attribution.</p>
+
+                <h4>What is the PC Algorithm?</h4>
+                <p>The PC (Peter-Clark) Algorithm is a constraint-based causal discovery algorithm that identifies causal relationships from observational data. It builds a directed acyclic graph (DAG) showing which touchpoints causally influence others and the conversion.</p>
+
+                <h4>What is Propensity Score Matching?</h4>
+                <p>Propensity Score Matching accounts for selection bias by comparing customers who were exposed to a channel with similar customers who weren't. This helps isolate the true causal effect of each channel.</p>
+
+                <h4>What is Doubly Robust Estimation?</h4>
+                <p>Doubly Robust Estimation combines outcome regression and propensity score weighting for more robust causal effect estimates. It provides accurate results even if one of the two models is misspecified.</p>
+
+                <h4>How accurate is causal attribution?</h4>
+                <p>Causal attribution is significantly more accurate than correlation-based methods. Studies show traditional attribution can misattribute up to 60% of credit. Our causal methods, when properly validated, achieve 85-95% accuracy in controlled experiments.</p>
+            </div>
+
+            <h2>Data Requirements</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>How much data do I need?</h4>
+                <p>You can analyze individual customer journeys with as few as 2 touchpoints. For the most accurate causal discovery, we recommend:</p>
+                <ul>
+                    <li>Minimum 100 completed customer journeys</li>
+                    <li>At least 3-5 different marketing channels</li>
+                    <li>Mix of converted and non-converted journeys (for some advanced models)</li>
+                </ul>
+
+                <h4>What data do I need to provide?</h4>
+                <p>For basic attribution, you need:</p>
+                <ul>
+                    <li><strong>Touchpoints:</strong> timestamp, channel name, cost, user_id</li>
+                    <li><strong>Conversion:</strong> timestamp, value, user_id</li>
+                </ul>
+                <p>Optional fields include campaign name, creative ID, device type, and custom metadata.</p>
+
+                <h4>Can I analyze non-conversion journeys?</h4>
+                <p>Yes! While basic attribution focuses on converted journeys, our advanced causal models can incorporate non-conversion data to better understand channel effectiveness and identify optimization opportunities.</p>
+
+                <h4>How do I handle multi-device journeys?</h4>
+                <p>Use a consistent user_id across devices (like a logged-in user ID or cross-device identifier). The API will analyze the full journey regardless of device switches.</p>
+
+                <h4>What if I don't have cost data for all touchpoints?</h4>
+                <p>Cost data is optional but recommended for ROI calculations. If you don't provide costs, the API will still calculate attribution credits, but ROI metrics will be unavailable.</p>
+            </div>
+
+            <h2>Support & SLA</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>What support channels are available?</h4>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></li>
+                    <li><strong>GitHub Issues:</strong> <a href="https://github.com/rdmurugan/causallm/issues" target="_blank">github.com/rdmurugan/causallm</a></li>
+                    <li><strong>Documentation:</strong> Comprehensive guides and examples</li>
+                    <li><strong>Community Forum:</strong> Connect with other users (coming soon)</li>
+                </ul>
+
+                <h4>What are the support response times?</h4>
+                <ul>
+                    <li><strong>Starter:</strong> Email support, 24-48 hour response time</li>
+                    <li><strong>Professional:</strong> Priority email support, 12-24 hour response</li>
+                    <li><strong>Business:</strong> Phone & email support, 4-8 hour response</li>
+                    <li><strong>Enterprise:</strong> Dedicated account manager, 1-2 hour response</li>
+                </ul>
+
+                <h4>Do you offer onboarding assistance?</h4>
+                <p>Yes! Professional and higher plans include a dedicated onboarding session to help you integrate the API and interpret results. Enterprise plans include ongoing technical account management.</p>
+
+                <h4>Can you help with custom integration?</h4>
+                <p>Yes. Business and Enterprise plans include custom integration support. We can help you integrate with your existing analytics stack, data warehouse, or BI tools.</p>
+
+                <h4>Is there an SLA?</h4>
+                <p>Yes. All plans include a 99.9% uptime SLA. Enterprise plans can upgrade to 99.99% with service credits for any downtime. We also guarantee response time SLAs for support tickets.</p>
+            </div>
+
+            <h2>Getting Started</h2>
+
+            <div style="margin: 2rem 0;">
+                <h4>How do I get an API key?</h4>
+                <p>Email us at <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a> with your company name and expected usage. We'll respond within 24 hours with your API key and access details.</p>
+
+                <h4>Can I test the API before committing?</h4>
+                <p>Yes! We offer a 14-day free trial with access to all Professional plan features. No credit card required to start.</p>
+
+                <h4>Where do I find code examples?</h4>
+                <p>Check our <a href="examples.html">examples page</a> for copy-paste ready code in Python, JavaScript, PHP, Ruby, R, and more. We also have <a href="agentic-ai.html">AI agent integration examples</a> for OpenAI, Claude, and LangChain.</p>
+
+                <h4>Is there a sandbox environment?</h4>
+                <p>During your trial period, you have full access to the production API with no restrictions. This lets you test with real data and see actual results before committing to a paid plan.</p>
+            </div>
+
+            <div style="background: var(--bg-light); padding: 2rem; border-radius: 8px; margin: 3rem 0; text-align: center;">
+                <h3>Still have questions?</h3>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">We're here to help! Contact us and we'll respond within 24 hours.</p>
+                <a href="mailto:durai@infinidatum.net" class="button primary">Contact Support</a>
+                <a href="getting-started.html" class="button secondary" style="margin-left: 1rem;">Getting Started Guide</a>
+            </div>
+
+            <div style="background: var(--primary-color); color: white; padding: 3rem; border-radius: 12px; text-align: center; margin: 4rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Ready to Get Started?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Start your 14-day free trial today. No credit card required.</p>
+                <a href="../index.html#contact" class="button" style="background: white; color: var(--primary-color);">Get API Key</a>
+                <a href="pricing.html" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">View Pricing</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
 </body>
 </html>

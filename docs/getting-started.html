@@ -51,10 +51,288 @@
             </ul>
         </nav>
     </header>
-    <div class="docs-container" style="text-align: center; padding: 4rem 0;">
-        <h1>PAGE_TITLE</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">Full documentation available on GitHub</p>
-        <a href="GITHUB_URL" class="button primary" target="_blank">View on GitHub →</a>
+    <div class="docs-header">
+        <div class="container">
+            <h1>Getting Started</h1>
+            <p>Start using the Causal Attribution API in minutes</p>
+        </div>
     </div>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h2>Quick Start Guide</h2>
+            <p>This guide will help you make your first API request to the Causal Attribution API in just a few minutes.</p>
+
+            <h3>Step 1: Get Your API Key</h3>
+            <p>To access the API, you'll need an API key. Getting one is simple:</p>
+            <ol>
+                <li>Email us at <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></li>
+                <li>Include your company name and expected monthly touchpoint volume</li>
+                <li>We'll respond within 24 hours with your API key and access details</li>
+                <li>Start with our 14-day free trial - no credit card required</li>
+            </ol>
+
+            <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                <p><strong>Note:</strong> During the trial period, you'll have access to all features of the Professional plan, including 250,000 touchpoints and 5,000 API calls per month.</p>
+            </div>
+
+            <h3>Step 2: Authentication</h3>
+            <p>The API uses API key authentication. Include your API key in the request headers:</p>
+            <pre><code>Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json</code></pre>
+
+            <h3>Step 3: Make Your First Request</h3>
+            <p>Here's a simple example using cURL to analyze attribution for a customer journey:</p>
+
+            <h4>cURL Example</h4>
+            <pre><code>curl -X POST https://api.causalattribution.com/v1/attribute \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "touchpoints": [
+      {
+        "timestamp": "2025-01-01T10:00:00Z",
+        "channel": "facebook_ad",
+        "cost": 2.50,
+        "user_id": "user123"
+      },
+      {
+        "timestamp": "2025-01-02T15:30:00Z",
+        "channel": "google_search",
+        "cost": 3.75,
+        "user_id": "user123"
+      },
+      {
+        "timestamp": "2025-01-03T18:45:00Z",
+        "channel": "email",
+        "cost": 0.10,
+        "user_id": "user123"
+      }
+    ],
+    "conversion": {
+      "timestamp": "2025-01-03T19:00:00Z",
+      "value": 150.00,
+      "user_id": "user123"
+    },
+    "model": "data_driven"
+  }'</code></pre>
+
+            <h4>Python Example</h4>
+            <pre><code>import requests
+
+api_key = "YOUR_API_KEY"
+url = "https://api.causalattribution.com/v1/attribute"
+
+headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+
+data = {
+    "touchpoints": [
+        {
+            "timestamp": "2025-01-01T10:00:00Z",
+            "channel": "facebook_ad",
+            "cost": 2.50,
+            "user_id": "user123"
+        },
+        {
+            "timestamp": "2025-01-02T15:30:00Z",
+            "channel": "google_search",
+            "cost": 3.75,
+            "user_id": "user123"
+        },
+        {
+            "timestamp": "2025-01-03T18:45:00Z",
+            "channel": "email",
+            "cost": 0.10,
+            "user_id": "user123"
+        }
+    ],
+    "conversion": {
+        "timestamp": "2025-01-03T19:00:00Z",
+        "value": 150.00,
+        "user_id": "user123"
+    },
+    "model": "data_driven"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())</code></pre>
+
+            <h4>JavaScript Example</h4>
+            <pre><code>const apiKey = 'YOUR_API_KEY';
+const url = 'https://api.causalattribution.com/v1/attribute';
+
+const data = {
+  touchpoints: [
+    {
+      timestamp: '2025-01-01T10:00:00Z',
+      channel: 'facebook_ad',
+      cost: 2.50,
+      user_id: 'user123'
+    },
+    {
+      timestamp: '2025-01-02T15:30:00Z',
+      channel: 'google_search',
+      cost: 3.75,
+      user_id: 'user123'
+    },
+    {
+      timestamp: '2025-01-03T18:45:00Z',
+      channel: 'email',
+      cost: 0.10,
+      user_id: 'user123'
+    }
+  ],
+  conversion: {
+    timestamp: '2025-01-03T19:00:00Z',
+    value: 150.00,
+    user_id: 'user123'
+  },
+  model: 'data_driven'
+};
+
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));</code></pre>
+
+            <h3>Step 4: Understanding the Response</h3>
+            <p>The API returns a JSON response with attribution scores for each touchpoint:</p>
+            <pre><code>{
+  "attribution": {
+    "facebook_ad": {
+      "credit": 0.35,
+      "attributed_value": 52.50,
+      "roi": 21.00
+    },
+    "google_search": {
+      "credit": 0.45,
+      "attributed_value": 67.50,
+      "roi": 18.00
+    },
+    "email": {
+      "credit": 0.20,
+      "attributed_value": 30.00,
+      "roi": 300.00
+    }
+  },
+  "model_used": "data_driven",
+  "total_conversion_value": 150.00,
+  "confidence_score": 0.92,
+  "causal_graph": {
+    "edges": [
+      {"from": "facebook_ad", "to": "google_search", "strength": 0.65},
+      {"from": "google_search", "to": "email", "strength": 0.42}
+    ]
+  }
+}</code></pre>
+
+            <h4>Response Fields Explained</h4>
+            <ul>
+                <li><strong>credit:</strong> The proportion of conversion credit (0-1) assigned to each touchpoint</li>
+                <li><strong>attributed_value:</strong> The dollar value attributed to this touchpoint (credit × conversion value)</li>
+                <li><strong>roi:</strong> Return on investment for this touchpoint (attributed_value / cost)</li>
+                <li><strong>confidence_score:</strong> Statistical confidence in the attribution results (0-1)</li>
+                <li><strong>causal_graph:</strong> Discovered causal relationships between touchpoints</li>
+            </ul>
+
+            <h3>Available Attribution Models</h3>
+            <p>You can specify different attribution models in your request:</p>
+            <ul>
+                <li><strong>data_driven</strong> - Our proprietary causal inference model (recommended)</li>
+                <li><strong>shapley</strong> - Shapley Value attribution (game theory-based)</li>
+                <li><strong>first_touch</strong> - All credit to first touchpoint</li>
+                <li><strong>last_touch</strong> - All credit to last touchpoint</li>
+                <li><strong>linear</strong> - Equal credit to all touchpoints</li>
+                <li><strong>time_decay</strong> - More credit to recent touchpoints</li>
+                <li><strong>position_based</strong> - 40% first, 40% last, 20% middle</li>
+            </ul>
+
+            <h3>Next Steps</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>📚 Explore Examples</h4>
+                    <p>Check out complete code examples in multiple programming languages.</p>
+                    <a href="examples.html" class="button secondary">View Examples →</a>
+                </div>
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>📘 API Reference</h4>
+                    <p>Dive deep into all available endpoints and parameters.</p>
+                    <a href="documentation.html" class="button secondary">View Docs →</a>
+                </div>
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>🤖 AI Integration</h4>
+                    <p>Learn how to integrate with OpenAI, Claude, and LangChain.</p>
+                    <a href="agentic-ai.html" class="button secondary">View Guide →</a>
+                </div>
+            </div>
+
+            <div style="background: var(--primary-color); color: white; padding: 3rem; border-radius: 12px; text-align: center; margin: 4rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Need Help Getting Started?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Our team is here to help you succeed.</p>
+                <a href="mailto:durai@infinidatum.net" class="button" style="background: white; color: var(--primary-color);">Contact Support</a>
+                <a href="faq.html" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">View FAQ</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
 </body>
 </html>

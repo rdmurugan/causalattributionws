@@ -51,10 +51,279 @@
             </ul>
         </nav>
     </header>
-    <div class="docs-container" style="text-align: center; padding: 4rem 0;">
-        <h1>PAGE_TITLE</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">Full documentation available on GitHub</p>
-        <a href="GITHUB_URL" class="button primary" target="_blank">View on GitHub →</a>
+    <div class="docs-header">
+        <div class="container">
+            <h1>Benefits of Causal Attribution</h1>
+            <p>Why causal inference matters for marketing attribution</p>
+        </div>
     </div>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h2>Why Causal Attribution?</h2>
+            <p>Traditional attribution methods rely on correlation, which often leads to misattribution and wasted marketing spend. Our causal inference approach reveals true cause-and-effect relationships in your customer journeys.</p>
+
+            <h3>Causal Inference vs. Correlation</h3>
+            <div style="background: var(--bg-light); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h4>The Problem with Correlation-Based Attribution</h4>
+                <p>Most attribution platforms use correlation-based models (like last-click, first-click, or simple multi-touch attribution). These models can't distinguish between:</p>
+                <ul>
+                    <li><strong>Causation:</strong> Channel A truly drove the conversion</li>
+                    <li><strong>Correlation:</strong> Channel A just happened to occur before conversion</li>
+                    <li><strong>Confounding:</strong> Both Channel A and conversion were caused by a third factor</li>
+                </ul>
+
+                <h4 style="margin-top: 2rem;">The Power of Causal Inference</h4>
+                <p>Our API uses advanced causal inference methods to discover true cause-and-effect relationships:</p>
+                <ul>
+                    <li><strong>PC Algorithm:</strong> Discovers causal structure from observational data</li>
+                    <li><strong>Propensity Score Matching:</strong> Accounts for selection bias in channel exposure</li>
+                    <li><strong>Doubly Robust Estimation:</strong> Combines multiple estimation strategies for robustness</li>
+                    <li><strong>Instrumental Variables:</strong> Identifies causal effects even with hidden confounders</li>
+                </ul>
+            </div>
+
+            <h3>Scientific Rigor</h3>
+            <p>Our attribution models are built on peer-reviewed academic research in causal inference, not heuristics or rules of thumb.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Academic Foundation</h4>
+                    <p>Based on methods developed by Nobel Prize-winning economists and leading computer scientists:</p>
+                    <ul>
+                        <li>Judea Pearl's causal diagrams</li>
+                        <li>Donald Rubin's potential outcomes framework</li>
+                        <li>Peter Spirtes & Clark Glymour's PC algorithm</li>
+                    </ul>
+                </div>
+
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Statistical Validity</h4>
+                    <p>Every attribution result includes:</p>
+                    <ul>
+                        <li>Confidence scores (0-1)</li>
+                        <li>Confidence intervals</li>
+                        <li>Statistical significance tests</li>
+                        <li>Robustness checks across models</li>
+                    </ul>
+                </div>
+
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Transparent Methodology</h4>
+                    <p>Unlike black-box ML models, we provide:</p>
+                    <ul>
+                        <li>Discovered causal graphs</li>
+                        <li>Edge strengths between channels</li>
+                        <li>Assumptions and limitations</li>
+                        <li>Open-source implementations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Accurate ROI Measurement</h3>
+            <p>Make data-driven budget allocation decisions with confidence.</p>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h4 style="color: white;">Real-World Impact</h4>
+                <p><strong>Case Study:</strong> E-commerce company reduced wasted ad spend by 40%</p>
+                <ul>
+                    <li>Previous last-click attribution over-credited paid search by 65%</li>
+                    <li>Causal analysis revealed display ads had 3x higher true ROI than reported</li>
+                    <li>Shifted $200K/month from search to display</li>
+                    <li>Overall conversion rate increased by 28%</li>
+                </ul>
+            </div>
+
+            <h3>Better Marketing Decisions</h3>
+            <p>Understand the true incrementality of each marketing channel and touchpoint.</p>
+
+            <h4>Questions Causal Attribution Answers:</h4>
+            <div style="margin: 1.5rem 0;">
+                <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: var(--bg-light); margin: 1rem 0;">
+                    <strong>Would this conversion have happened without Channel X?</strong>
+                    <p>Causal inference quantifies true incrementality, not just correlation.</p>
+                </div>
+
+                <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: var(--bg-light); margin: 1rem 0;">
+                    <strong>Which channels work synergistically?</strong>
+                    <p>Discover causal pathways showing how channels influence each other.</p>
+                </div>
+
+                <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: var(--bg-light); margin: 1rem 0;">
+                    <strong>What's the optimal channel mix?</strong>
+                    <p>Simulate counterfactual scenarios to find the best budget allocation.</p>
+                </div>
+
+                <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: var(--bg-light); margin: 1rem 0;">
+                    <strong>Are we over-investing in retargeting?</strong>
+                    <p>Distinguish between channels that create demand vs. capture existing demand.</p>
+                </div>
+            </div>
+
+            <h3>Real-World Use Cases</h3>
+
+            <h4>E-Commerce Brands</h4>
+            <ul>
+                <li>Optimize channel mix for customer acquisition</li>
+                <li>Identify high-ROI remarketing opportunities</li>
+                <li>Understand the path to purchase for different customer segments</li>
+                <li>Measure true incrementality of promotional campaigns</li>
+            </ul>
+
+            <h4>B2B SaaS Companies</h4>
+            <ul>
+                <li>Attribute multi-touch enterprise sales cycles correctly</li>
+                <li>Measure impact of content marketing on pipeline</li>
+                <li>Optimize spend across awareness, consideration, and decision stages</li>
+                <li>Calculate true customer acquisition cost (CAC) by channel</li>
+            </ul>
+
+            <h4>Marketing Agencies</h4>
+            <ul>
+                <li>Provide clients with scientifically rigorous attribution reports</li>
+                <li>Justify marketing spend with causal evidence</li>
+                <li>Differentiate services with advanced analytics</li>
+                <li>Scale attribution analysis across multiple clients</li>
+            </ul>
+
+            <h4>Financial Services</h4>
+            <ul>
+                <li>Comply with attribution reporting requirements</li>
+                <li>Measure impact of brand vs. performance marketing</li>
+                <li>Understand complex, long-tail conversion funnels</li>
+                <li>Optimize cost per acquisition in regulated markets</li>
+            </ul>
+
+            <h3>Comparison with Traditional Methods</h3>
+            <div style="overflow-x: auto; margin: 2rem 0;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: var(--bg-light);">
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color);">Method</th>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color);">Accuracy</th>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color);">Accounts for Bias</th>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color);">Discovers Synergies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);"><strong>Causal Inference</strong></td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Very High</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Yes</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Yes</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Shapley Value</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Medium-High</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Partial</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Limited</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Multi-Touch (Linear)</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Medium</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Last-Click</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Low</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">First-Click</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Low</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">No</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Why Choose Our API?</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="text-align: center; padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 3rem; color: var(--primary-color);">60-75%</div>
+                    <p><strong>More Affordable</strong></p>
+                    <p>Than competing attribution platforms</p>
+                </div>
+
+                <div style="text-align: center; padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 3rem; color: var(--primary-color);">&lt;5s</div>
+                    <p><strong>Fast Analysis</strong></p>
+                    <p>Process 100K touchpoints in seconds</p>
+                </div>
+
+                <div style="text-align: center; padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 3rem; color: var(--primary-color);">7+</div>
+                    <p><strong>Attribution Models</strong></p>
+                    <p>Including proprietary causal inference</p>
+                </div>
+
+                <div style="text-align: center; padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 3rem; color: var(--primary-color);">99.9%</div>
+                    <p><strong>Uptime SLA</strong></p>
+                    <p>Enterprise-grade reliability</p>
+                </div>
+            </div>
+
+            <div style="background: var(--primary-color); color: white; padding: 3rem; border-radius: 12px; text-align: center; margin: 4rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Ready to Improve Your Marketing ROI?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Start with a 14-day free trial and see the difference causal attribution makes.</p>
+                <a href="../index.html#contact" class="button" style="background: white; color: var(--primary-color);">Get Started</a>
+                <a href="pricing.html" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">View Pricing</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
 </body>
 </html>

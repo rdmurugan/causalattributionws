@@ -51,10 +51,524 @@
             </ul>
         </nav>
     </header>
-    <div class="docs-container" style="text-align: center; padding: 4rem 0;">
-        <h1>PAGE_TITLE</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">Full documentation available on GitHub</p>
-        <a href="GITHUB_URL" class="button primary" target="_blank">View on GitHub →</a>
+    <div class="docs-header">
+        <div class="container">
+            <h1>AI Agent Integration</h1>
+            <p>Integrate causal attribution into your AI-powered workflows</p>
+        </div>
     </div>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h2>Integrate with AI Agents</h2>
+            <p>The Causal Attribution API is designed to work seamlessly with modern AI agents and LLM frameworks. Enable your AI assistants to perform sophisticated marketing attribution analysis.</p>
+
+            <h3>OpenAI GPT-4 Function Calling</h3>
+            <p>Use GPT-4's function calling feature to let your AI assistant analyze attribution:</p>
+
+            <pre><code>import openai
+import requests
+
+# Define the attribution function for GPT-4
+functions = [
+    {
+        "name": "analyze_causal_attribution",
+        "description": "Analyze marketing attribution using causal inference to determine which channels contributed to a conversion",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "touchpoints": {
+                    "type": "array",
+                    "description": "List of marketing touchpoints in the customer journey",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {"type": "string", "description": "ISO 8601 timestamp"},
+                            "channel": {"type": "string", "description": "Marketing channel name"},
+                            "cost": {"type": "number", "description": "Cost of this touchpoint"},
+                            "user_id": {"type": "string", "description": "User identifier"}
+                        }
+                    }
+                },
+                "conversion": {
+                    "type": "object",
+                    "description": "Conversion event details",
+                    "properties": {
+                        "timestamp": {"type": "string"},
+                        "value": {"type": "number"},
+                        "user_id": {"type": "string"}
+                    }
+                },
+                "model": {
+                    "type": "string",
+                    "enum": ["data_driven", "shapley", "first_touch", "last_touch", "linear"],
+                    "description": "Attribution model to use"
+                }
+            },
+            "required": ["touchpoints", "conversion"]
+        }
+    }
+]
+
+def analyze_causal_attribution(touchpoints, conversion, model="data_driven"):
+    """Call the Causal Attribution API"""
+    api_key = "YOUR_API_KEY"
+    url = "https://api.causalattribution.com/v1/attribute"
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "touchpoints": touchpoints,
+        "conversion": conversion,
+        "model": model
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    return response.json()
+
+# Example conversation with GPT-4
+messages = [
+    {
+        "role": "user",
+        "content": "I had a customer who saw our Facebook ad on Jan 1st (cost $2.50), "
+                  "searched for us on Google on Jan 2nd (cost $3.75), and then "
+                  "clicked an email on Jan 3rd (cost $0.10) before purchasing for $150. "
+                  "Which channel should get the most credit?"
+    }
+]
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=messages,
+    functions=functions,
+    function_call="auto"
+)
+
+# Check if GPT-4 wants to call our function
+if response.choices[0].message.get("function_call"):
+    function_call = response.choices[0].message["function_call"]
+    function_args = json.loads(function_call["arguments"])
+
+    # Call the attribution API
+    attribution_result = analyze_causal_attribution(**function_args)
+
+    # Send results back to GPT-4
+    messages.append(response.choices[0].message)
+    messages.append({
+        "role": "function",
+        "name": "analyze_causal_attribution",
+        "content": json.dumps(attribution_result)
+    })
+
+    # Get GPT-4's interpretation
+    final_response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages
+    )
+
+    print(final_response.choices[0].message["content"])</code></pre>
+
+            <h3>Anthropic Claude Tool Use</h3>
+            <p>Integrate with Claude using the tool use API:</p>
+
+            <pre><code>import anthropic
+import requests
+
+client = anthropic.Anthropic(api_key="YOUR_ANTHROPIC_API_KEY")
+
+# Define the tool for Claude
+tools = [
+    {
+        "name": "causal_attribution_analysis",
+        "description": "Analyzes marketing attribution using causal inference methods to determine which channels truly drove a conversion. Returns attribution credits, ROI, and causal relationships between channels.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "touchpoints": {
+                    "type": "array",
+                    "description": "Array of marketing touchpoints in chronological order",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {"type": "string"},
+                            "channel": {"type": "string"},
+                            "cost": {"type": "number"},
+                            "user_id": {"type": "string"}
+                        }
+                    }
+                },
+                "conversion": {
+                    "type": "object",
+                    "description": "The conversion event",
+                    "properties": {
+                        "timestamp": {"type": "string"},
+                        "value": {"type": "number"},
+                        "user_id": {"type": "string"}
+                    }
+                },
+                "model": {
+                    "type": "string",
+                    "enum": ["data_driven", "shapley", "linear"],
+                    "description": "Attribution model (default: data_driven)"
+                }
+            },
+            "required": ["touchpoints", "conversion"]
+        }
+    }
+]
+
+def process_tool_call(tool_name, tool_input):
+    """Execute the attribution API call"""
+    if tool_name == "causal_attribution_analysis":
+        api_key = "YOUR_CAUSAL_ATTRIBUTION_API_KEY"
+        url = "https://api.causalattribution.com/v1/attribute"
+
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        response = requests.post(url, headers=headers, json=tool_input)
+        return response.json()
+
+# Example conversation
+user_message = """
+I'm analyzing a customer journey with these touchpoints:
+- Jan 1: Facebook ad ($2.50)
+- Jan 2: Google search ($3.75)
+- Jan 3: Email click ($0.10)
+- Jan 3: Purchased for $150
+
+Can you tell me which channels deserve the most credit using causal attribution?
+"""
+
+messages = [{"role": "user", "content": user_message}]
+
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=4096,
+    tools=tools,
+    messages=messages
+)
+
+# Process tool calls
+while response.stop_reason == "tool_use":
+    tool_use = next(block for block in response.content if block.type == "tool_use")
+    tool_result = process_tool_call(tool_use.name, tool_use.input)
+
+    messages.append({"role": "assistant", "content": response.content})
+    messages.append({
+        "role": "user",
+        "content": [
+            {
+                "type": "tool_result",
+                "tool_use_id": tool_use.id,
+                "content": json.dumps(tool_result)
+            }
+        ]
+    })
+
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=4096,
+        tools=tools,
+        messages=messages
+    )
+
+# Print final response
+final_text = next(block.text for block in response.content if hasattr(block, "text"))
+print(final_text)</code></pre>
+
+            <h3>LangChain Integration</h3>
+            <p>Create a custom LangChain tool for attribution analysis:</p>
+
+            <pre><code>from langchain.tools import BaseTool
+from langchain.agents import initialize_agent, AgentType
+from langchain.chat_models import ChatOpenAI
+from typing import Optional, Type
+from pydantic import BaseModel, Field
+import requests
+
+class AttributionInput(BaseModel):
+    """Input schema for causal attribution tool"""
+    touchpoints: list = Field(description="List of touchpoint dictionaries with timestamp, channel, cost, user_id")
+    conversion: dict = Field(description="Conversion dictionary with timestamp, value, user_id")
+    model: Optional[str] = Field(default="data_driven", description="Attribution model to use")
+
+class CausalAttributionTool(BaseTool):
+    name = "causal_attribution_analyzer"
+    description = """
+    Analyzes marketing attribution using causal inference to determine which channels
+    truly contributed to a conversion. Input should be touchpoints (list of dicts with
+    timestamp, channel, cost, user_id) and conversion (dict with timestamp, value, user_id).
+    Returns attribution credits, ROI, and causal relationships.
+    """
+    args_schema: Type[BaseModel] = AttributionInput
+
+    def _run(self, touchpoints: list, conversion: dict, model: str = "data_driven") -> dict:
+        """Execute the attribution analysis"""
+        api_key = "YOUR_API_KEY"
+        url = "https://api.causalattribution.com/v1/attribute"
+
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "touchpoints": touchpoints,
+            "conversion": conversion,
+            "model": model
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        return response.json()
+
+    async def _arun(self, *args, **kwargs):
+        """Async version (not implemented)"""
+        raise NotImplementedError("Async not supported yet")
+
+# Initialize agent with the tool
+llm = ChatOpenAI(model="gpt-4", temperature=0)
+tools = [CausalAttributionTool()]
+
+agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    agent=AgentType.OPENAI_FUNCTIONS,
+    verbose=True
+)
+
+# Example usage
+result = agent.run("""
+Analyze this customer journey:
+- 2025-01-01 10:00: Facebook ad, cost $2.50, user123
+- 2025-01-02 15:30: Google search, cost $3.75, user123
+- 2025-01-03 18:45: Email, cost $0.10, user123
+- 2025-01-03 19:00: Purchased $150, user123
+
+Which channel deserves the most credit and why?
+""")</code></pre>
+
+            <h3>Custom Agent Framework</h3>
+            <p>Build your own AI agent that uses causal attribution:</p>
+
+            <pre><code>import requests
+from typing import List, Dict
+
+class MarketingAttributionAgent:
+    """AI agent specialized in marketing attribution analysis"""
+
+    def __init__(self, attribution_api_key: str, llm_api_key: str):
+        self.attribution_api_key = attribution_api_key
+        self.llm_api_key = llm_api_key
+        self.base_url = "https://api.causalattribution.com/v1"
+
+    def analyze_journey(self, touchpoints: List[Dict], conversion: Dict) -> Dict:
+        """Perform causal attribution analysis"""
+        headers = {
+            "Authorization": f"Bearer {self.attribution_api_key}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "touchpoints": touchpoints,
+            "conversion": conversion,
+            "model": "data_driven",
+            "options": {
+                "return_causal_graph": True,
+                "confidence_interval": 0.95
+            }
+        }
+
+        response = requests.post(
+            f"{self.base_url}/attribute",
+            headers=headers,
+            json=payload
+        )
+
+        return response.json()
+
+    def get_recommendations(self, attribution_results: Dict) -> str:
+        """Generate actionable recommendations from attribution results"""
+        attribution = attribution_results.get("attribution", {})
+
+        # Sort channels by ROI
+        channels_by_roi = sorted(
+            attribution.items(),
+            key=lambda x: x[1].get("roi", 0),
+            reverse=True
+        )
+
+        recommendations = []
+        recommendations.append("Marketing Attribution Analysis & Recommendations\n")
+        recommendations.append("=" * 50 + "\n")
+
+        # High performers
+        if channels_by_roi:
+            top_channel = channels_by_roi[0]
+            recommendations.append(f"Top Performing Channel: {top_channel[0]}")
+            recommendations.append(f"  - ROI: {top_channel[1]['roi']:.2f}x")
+            recommendations.append(f"  - Attribution Credit: {top_channel[1]['credit'] * 100:.1f}%")
+            recommendations.append(f"  - Recommendation: Consider increasing budget\n")
+
+        # Underperformers
+        if len(channels_by_roi) > 1:
+            bottom_channel = channels_by_roi[-1]
+            if bottom_channel[1]['roi'] < 2.0:
+                recommendations.append(f"Underperforming Channel: {bottom_channel[0]}")
+                recommendations.append(f"  - ROI: {bottom_channel[1]['roi']:.2f}x")
+                recommendations.append(f"  - Recommendation: Review or reduce budget\n")
+
+        # Causal insights
+        if "causal_graph" in attribution_results:
+            recommendations.append("Causal Relationships Discovered:")
+            for edge in attribution_results["causal_graph"].get("edges", []):
+                recommendations.append(
+                    f"  - {edge['from']} influences {edge['to']} "
+                    f"(strength: {edge['strength']:.2f})"
+                )
+
+        return "\n".join(recommendations)
+
+    def chat(self, user_message: str, journey_data: Dict = None) -> str:
+        """Interactive chat interface for attribution analysis"""
+        if journey_data:
+            # Perform attribution analysis
+            results = self.analyze_journey(
+                journey_data["touchpoints"],
+                journey_data["conversion"]
+            )
+
+            # Generate recommendations
+            recommendations = self.get_recommendations(results)
+
+            return f"""
+Based on causal attribution analysis:
+
+{recommendations}
+
+Raw Results:
+{json.dumps(results, indent=2)}
+            """
+        else:
+            return "Please provide journey data with 'touchpoints' and 'conversion' fields."
+
+# Example usage
+agent = MarketingAttributionAgent(
+    attribution_api_key="YOUR_API_KEY",
+    llm_api_key="YOUR_LLM_API_KEY"
+)
+
+journey = {
+    "touchpoints": [
+        {"timestamp": "2025-01-01T10:00:00Z", "channel": "facebook_ad", "cost": 2.50, "user_id": "user123"},
+        {"timestamp": "2025-01-02T15:30:00Z", "channel": "google_search", "cost": 3.75, "user_id": "user123"},
+        {"timestamp": "2025-01-03T18:45:00Z", "channel": "email", "cost": 0.10, "user_id": "user123"}
+    ],
+    "conversion": {
+        "timestamp": "2025-01-03T19:00:00Z",
+        "value": 150.00,
+        "user_id": "user123"
+    }
+}
+
+response = agent.chat("Analyze this customer journey", journey_data=journey)
+print(response)</code></pre>
+
+            <h3>Use Cases for AI Integration</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Automated Reporting</h4>
+                    <p>Let AI agents automatically analyze attribution data and generate insights for stakeholders.</p>
+                </div>
+
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Natural Language Queries</h4>
+                    <p>Enable marketers to ask questions in plain English and get attribution insights.</p>
+                </div>
+
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Budget Optimization</h4>
+                    <p>AI agents can analyze attribution and recommend optimal budget allocation.</p>
+                </div>
+
+                <div style="border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Anomaly Detection</h4>
+                    <p>Detect unusual patterns in attribution and alert teams automatically.</p>
+                </div>
+            </div>
+
+            <h3>Best Practices</h3>
+            <ul>
+                <li><strong>Error Handling:</strong> Always implement proper error handling for API calls</li>
+                <li><strong>Rate Limiting:</strong> Respect API rate limits in your agent loops</li>
+                <li><strong>Caching:</strong> Cache attribution results for similar queries to improve performance</li>
+                <li><strong>Validation:</strong> Validate touchpoint and conversion data before sending to API</li>
+                <li><strong>Interpretation:</strong> Use LLMs to interpret results for non-technical stakeholders</li>
+            </ul>
+
+            <div style="background: var(--primary-color); color: white; padding: 3rem; border-radius: 12px; text-align: center; margin: 4rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Build Smarter AI Agents</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Integrate causal attribution into your AI workflows today.</p>
+                <a href="../index.html#contact" class="button" style="background: white; color: var(--primary-color);">Get API Key</a>
+                <a href="documentation.html" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">API Reference</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
 </body>
 </html>

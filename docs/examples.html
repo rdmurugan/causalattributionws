@@ -51,10 +51,571 @@
             </ul>
         </nav>
     </header>
-    <div class="docs-container" style="text-align: center; padding: 4rem 0;">
-        <h1>PAGE_TITLE</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">Full documentation available on GitHub</p>
-        <a href="GITHUB_URL" class="button primary" target="_blank">View on GitHub →</a>
+    <div class="docs-header">
+        <div class="container">
+            <h1>Code Examples</h1>
+            <p>Complete working examples in multiple programming languages</p>
+        </div>
     </div>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h2>API Examples</h2>
+            <p>Copy-paste ready code examples for calling the Causal Attribution API in your preferred programming language.</p>
+
+            <h3>cURL</h3>
+            <p>Basic command-line example for testing the API:</p>
+            <pre><code>curl -X POST https://api.causalattribution.com/v1/attribute \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "touchpoints": [
+      {
+        "timestamp": "2025-01-01T10:00:00Z",
+        "channel": "facebook_ad",
+        "cost": 2.50,
+        "user_id": "user123",
+        "campaign": "summer_sale"
+      },
+      {
+        "timestamp": "2025-01-02T15:30:00Z",
+        "channel": "google_search",
+        "cost": 3.75,
+        "user_id": "user123",
+        "campaign": "brand_awareness"
+      },
+      {
+        "timestamp": "2025-01-03T18:45:00Z",
+        "channel": "email",
+        "cost": 0.10,
+        "user_id": "user123",
+        "campaign": "retargeting"
+      }
+    ],
+    "conversion": {
+      "timestamp": "2025-01-03T19:00:00Z",
+      "value": 150.00,
+      "user_id": "user123",
+      "type": "purchase"
+    },
+    "model": "data_driven",
+    "options": {
+      "return_causal_graph": true,
+      "confidence_interval": 0.95
+    }
+  }'</code></pre>
+
+            <h3>Python</h3>
+            <p>Using the popular <code>requests</code> library:</p>
+            <pre><code>import requests
+import json
+
+class CausalAttributionAPI:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://api.causalattribution.com/v1"
+        self.headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+    def analyze_attribution(self, touchpoints, conversion, model="data_driven", options=None):
+        """
+        Analyze attribution for a customer journey.
+
+        Args:
+            touchpoints: List of touchpoint dictionaries
+            conversion: Conversion dictionary
+            model: Attribution model to use (default: data_driven)
+            options: Additional options dictionary
+
+        Returns:
+            Attribution results dictionary
+        """
+        endpoint = f"{self.base_url}/attribute"
+
+        payload = {
+            "touchpoints": touchpoints,
+            "conversion": conversion,
+            "model": model
+        }
+
+        if options:
+            payload["options"] = options
+
+        response = requests.post(endpoint, headers=self.headers, json=payload)
+        response.raise_for_status()
+
+        return response.json()
+
+    def batch_analyze(self, journeys):
+        """
+        Analyze multiple customer journeys in a single request.
+
+        Args:
+            journeys: List of journey dictionaries
+
+        Returns:
+            Batch attribution results
+        """
+        endpoint = f"{self.base_url}/batch-attribute"
+
+        payload = {"journeys": journeys}
+
+        response = requests.post(endpoint, headers=self.headers, json=payload)
+        response.raise_for_status()
+
+        return response.json()
+
+# Example usage
+if __name__ == "__main__":
+    api = CausalAttributionAPI("YOUR_API_KEY")
+
+    touchpoints = [
+        {
+            "timestamp": "2025-01-01T10:00:00Z",
+            "channel": "facebook_ad",
+            "cost": 2.50,
+            "user_id": "user123"
+        },
+        {
+            "timestamp": "2025-01-02T15:30:00Z",
+            "channel": "google_search",
+            "cost": 3.75,
+            "user_id": "user123"
+        }
+    ]
+
+    conversion = {
+        "timestamp": "2025-01-03T19:00:00Z",
+        "value": 150.00,
+        "user_id": "user123"
+    }
+
+    results = api.analyze_attribution(
+        touchpoints=touchpoints,
+        conversion=conversion,
+        model="data_driven",
+        options={"return_causal_graph": True}
+    )
+
+    print(json.dumps(results, indent=2))</code></pre>
+
+            <h3>JavaScript (Node.js)</h3>
+            <p>Using native <code>fetch</code> API:</p>
+            <pre><code>const fetch = require('node-fetch');
+
+class CausalAttributionAPI {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.baseURL = 'https://api.causalattribution.com/v1';
+    this.headers = {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  async analyzeAttribution(touchpoints, conversion, model = 'data_driven', options = {}) {
+    const endpoint = `${this.baseURL}/attribute`;
+
+    const payload = {
+      touchpoints,
+      conversion,
+      model,
+      ...options
+    };
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Attribution API Error:', error);
+      throw error;
+    }
+  }
+
+  async batchAnalyze(journeys) {
+    const endpoint = `${this.baseURL}/batch-attribute`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify({ journeys })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Batch Attribution Error:', error);
+      throw error;
+    }
+  }
+}
+
+// Example usage
+(async () => {
+  const api = new CausalAttributionAPI('YOUR_API_KEY');
+
+  const touchpoints = [
+    {
+      timestamp: '2025-01-01T10:00:00Z',
+      channel: 'facebook_ad',
+      cost: 2.50,
+      user_id: 'user123'
+    },
+    {
+      timestamp: '2025-01-02T15:30:00Z',
+      channel: 'google_search',
+      cost: 3.75,
+      user_id: 'user123'
+    }
+  ];
+
+  const conversion = {
+    timestamp: '2025-01-03T19:00:00Z',
+    value: 150.00,
+    user_id: 'user123'
+  };
+
+  const results = await api.analyzeAttribution(touchpoints, conversion);
+  console.log(JSON.stringify(results, null, 2));
+})();</code></pre>
+
+            <h3>PHP</h3>
+            <p>Using <code>cURL</code> extension:</p>
+            <pre><code>&lt;?php
+
+class CausalAttributionAPI {
+    private $apiKey;
+    private $baseURL = 'https://api.causalattribution.com/v1';
+
+    public function __construct($apiKey) {
+        $this->apiKey = $apiKey;
+    }
+
+    public function analyzeAttribution($touchpoints, $conversion, $model = 'data_driven', $options = []) {
+        $endpoint = $this->baseURL . '/attribute';
+
+        $payload = [
+            'touchpoints' => $touchpoints,
+            'conversion' => $conversion,
+            'model' => $model
+        ];
+
+        if (!empty($options)) {
+            $payload['options'] = $options;
+        }
+
+        $ch = curl_init($endpoint);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $this->apiKey,
+            'Content-Type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            throw new Exception("API error: HTTP $httpCode");
+        }
+
+        return json_decode($response, true);
+    }
+}
+
+// Example usage
+$api = new CausalAttributionAPI('YOUR_API_KEY');
+
+$touchpoints = [
+    [
+        'timestamp' => '2025-01-01T10:00:00Z',
+        'channel' => 'facebook_ad',
+        'cost' => 2.50,
+        'user_id' => 'user123'
+    ],
+    [
+        'timestamp' => '2025-01-02T15:30:00Z',
+        'channel' => 'google_search',
+        'cost' => 3.75,
+        'user_id' => 'user123'
+    ]
+];
+
+$conversion = [
+    'timestamp' => '2025-01-03T19:00:00Z',
+    'value' => 150.00,
+    'user_id' => 'user123'
+];
+
+$results = $api->analyzeAttribution($touchpoints, $conversion);
+echo json_encode($results, JSON_PRETTY_PRINT);
+
+?&gt;</code></pre>
+
+            <h3>Ruby</h3>
+            <p>Using the <code>net/http</code> standard library:</p>
+            <pre><code>require 'net/http'
+require 'json'
+require 'uri'
+
+class CausalAttributionAPI
+  def initialize(api_key)
+    @api_key = api_key
+    @base_url = 'https://api.causalattribution.com/v1'
+  end
+
+  def analyze_attribution(touchpoints:, conversion:, model: 'data_driven', options: {})
+    uri = URI("#{@base_url}/attribute")
+
+    payload = {
+      touchpoints: touchpoints,
+      conversion: conversion,
+      model: model
+    }
+
+    payload[:options] = options unless options.empty?
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri.path)
+    request['Authorization'] = "Bearer #{@api_key}"
+    request['Content-Type'] = 'application/json'
+    request.body = payload.to_json
+
+    response = http.request(request)
+
+    raise "API error: #{response.code}" unless response.code == '200'
+
+    JSON.parse(response.body)
+  end
+end
+
+# Example usage
+api = CausalAttributionAPI.new('YOUR_API_KEY')
+
+touchpoints = [
+  {
+    timestamp: '2025-01-01T10:00:00Z',
+    channel: 'facebook_ad',
+    cost: 2.50,
+    user_id: 'user123'
+  },
+  {
+    timestamp: '2025-01-02T15:30:00Z',
+    channel: 'google_search',
+    cost: 3.75,
+    user_id: 'user123'
+  }
+]
+
+conversion = {
+  timestamp: '2025-01-03T19:00:00Z',
+  value: 150.00,
+  user_id: 'user123'
+}
+
+results = api.analyze_attribution(
+  touchpoints: touchpoints,
+  conversion: conversion,
+  model: 'data_driven'
+)
+
+puts JSON.pretty_generate(results)</code></pre>
+
+            <h3>R</h3>
+            <p>Using the <code>httr</code> package:</p>
+            <pre><code>library(httr)
+library(jsonlite)
+
+CausalAttributionAPI <- R6::R6Class(
+  "CausalAttributionAPI",
+
+  private = list(
+    api_key = NULL,
+    base_url = "https://api.causalattribution.com/v1"
+  ),
+
+  public = list(
+    initialize = function(api_key) {
+      private$api_key <- api_key
+    },
+
+    analyze_attribution = function(touchpoints, conversion, model = "data_driven", options = list()) {
+      endpoint <- paste0(private$base_url, "/attribute")
+
+      payload <- list(
+        touchpoints = touchpoints,
+        conversion = conversion,
+        model = model
+      )
+
+      if (length(options) > 0) {
+        payload$options <- options
+      }
+
+      response <- POST(
+        endpoint,
+        add_headers(
+          "Authorization" = paste("Bearer", private$api_key),
+          "Content-Type" = "application/json"
+        ),
+        body = toJSON(payload, auto_unbox = TRUE),
+        encode = "json"
+      )
+
+      if (status_code(response) != 200) {
+        stop(paste("API error:", status_code(response)))
+      }
+
+      content(response, as = "parsed")
+    }
+  )
+)
+
+# Example usage
+api <- CausalAttributionAPI$new("YOUR_API_KEY")
+
+touchpoints <- list(
+  list(
+    timestamp = "2025-01-01T10:00:00Z",
+    channel = "facebook_ad",
+    cost = 2.50,
+    user_id = "user123"
+  ),
+  list(
+    timestamp = "2025-01-02T15:30:00Z",
+    channel = "google_search",
+    cost = 3.75,
+    user_id = "user123"
+  )
+)
+
+conversion <- list(
+  timestamp = "2025-01-03T19:00:00Z",
+  value = 150.00,
+  user_id = "user123"
+)
+
+results <- api$analyze_attribution(touchpoints, conversion)
+print(results)</code></pre>
+
+            <h3>Common Use Cases</h3>
+
+            <h4>Multi-Channel Campaign Analysis</h4>
+            <p>Analyze attribution across multiple marketing channels:</p>
+            <pre><code># Python example
+touchpoints = [
+    {"timestamp": "2025-01-01T09:00:00Z", "channel": "facebook_ad", "cost": 5.00, "user_id": "user456"},
+    {"timestamp": "2025-01-01T14:00:00Z", "channel": "instagram_ad", "cost": 3.50, "user_id": "user456"},
+    {"timestamp": "2025-01-02T10:30:00Z", "channel": "google_search", "cost": 4.25, "user_id": "user456"},
+    {"timestamp": "2025-01-02T16:00:00Z", "channel": "email", "cost": 0.15, "user_id": "user456"},
+    {"timestamp": "2025-01-03T11:00:00Z", "channel": "retargeting", "cost": 2.75, "user_id": "user456"}
+]
+
+conversion = {
+    "timestamp": "2025-01-03T12:00:00Z",
+    "value": 299.00,
+    "user_id": "user456",
+    "type": "purchase"
+}
+
+results = api.analyze_attribution(touchpoints, conversion, model="data_driven")</code></pre>
+
+            <h4>Batch Processing</h4>
+            <p>Process multiple customer journeys efficiently:</p>
+            <pre><code># Python example
+journeys = [
+    {
+        "touchpoints": [...],  # Journey 1
+        "conversion": {...},
+        "journey_id": "journey_001"
+    },
+    {
+        "touchpoints": [...],  # Journey 2
+        "conversion": {...},
+        "journey_id": "journey_002"
+    }
+]
+
+batch_results = api.batch_analyze(journeys)</code></pre>
+
+            <div style="background: var(--primary-color); color: white; padding: 3rem; border-radius: 12px; text-align: center; margin: 4rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Ready to Start Building?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Get your API key and start integrating causal attribution today.</p>
+                <a href="../index.html#contact" class="button" style="background: white; color: var(--primary-color);">Get API Key</a>
+                <a href="documentation.html" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">View Full Docs</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
 </body>
 </html>

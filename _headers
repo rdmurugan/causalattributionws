@@ -1,0 +1,48 @@
+# Netlify/GitHub Pages Headers for Production Optimization
+
+/*
+  # Security Headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+  # Cache Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  # HTML files - cache for 1 hour
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/*.css
+  # CSS files - cache for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  # JavaScript files - cache for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.svg
+/*.webp
+  # Images - cache for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff
+/*.woff2
+/*.ttf
+/*.eot
+  # Fonts - cache for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/sitemap.xml
+  # Sitemap - cache for 1 day
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  # Robots - cache for 1 day
+  Cache-Control: public, max-age=86400

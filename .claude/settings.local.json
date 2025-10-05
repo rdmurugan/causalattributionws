@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in docs/getting-started.html docs/examples.html docs/pricing.html docs/benefits.html docs/agentic-ai.html docs/faq.html)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(head:*)",
+      "Bash(done)",
+      "Bash(chmod:*)",
+      "Bash(bash:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

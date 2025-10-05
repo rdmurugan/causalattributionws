@@ -1,24 +1,62 @@
 # Causal Attribution API - Website
 
-This folder contains the marketing website for the Causal Attribution API.
+Production-ready marketing website for the Causal Attribution API with advanced SEO optimization.
 
-## Structure
+## 🚀 Quick Start
+
+### Generate Images (Required)
+```bash
+# Generate placeholder images
+./generate-placeholders.sh
+
+# OR create branded images manually (recommended)
+# See: images/IMAGE_GENERATION_GUIDE.md
+```
+
+### Local Development
+```bash
+# Python
+python -m http.server 8000
+
+# Node.js
+npx http-server -p 8000
+
+# Visit: http://localhost:8000
+```
+
+### Deploy to Production
+See **[PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md)** for complete deployment guide.
+
+## 📁 Structure
 
 ```
 causalattributionws/
-├── index.html              # Main landing page
+├── index.html                    # Main landing page (SEO optimized)
 ├── css/
-│   ├── style.css           # Main website styles
-│   └── docs.css            # Documentation page styles
-├── docs/                   # Documentation HTML pages (to be created)
-│   ├── documentation.html  # API reference
-│   ├── getting-started.html
-│   ├── examples.html
-│   ├── pricing.html
-│   ├── benefits.html
-│   ├── agentic-ai.html
-│   └── faq.html
-└── README.md               # This file
+│   ├── style.css                 # Main website styles
+│   └── docs.css                  # Documentation page styles
+├── docs/                         # Documentation pages (all SEO optimized)
+│   ├── documentation.html        # API reference
+│   ├── getting-started.html      # Quick start guide
+│   ├── examples.html             # Code examples
+│   ├── pricing.html              # Pricing details
+│   ├── benefits.html             # Benefits of causal attribution
+│   ├── agentic-ai.html           # AI agent integration
+│   ├── faq.html                  # FAQ
+│   └── template.html             # Template for new pages
+├── images/                       # Images directory
+│   ├── favicon.svg               # Source favicon (SVG)
+│   └── IMAGE_GENERATION_GUIDE.md # Image creation guide
+├── robots.txt                    # Search engine crawling rules
+├── sitemap.xml                   # XML sitemap for search engines
+├── site.webmanifest             # PWA manifest
+├── _headers                      # Netlify/Cloudflare headers
+├── .htaccess                     # Apache server configuration
+├── analytics-setup.html          # Analytics tracking templates
+├── generate-placeholders.sh      # Image generation script
+├── PRODUCTION_DEPLOYMENT.md      # Deployment guide
+├── CLAUDE.md                     # AI development guide
+└── README.md                     # This file
 ```
 
 ## Deployment Options
@@ -156,34 +194,31 @@ Edit CSS variables in `css/style.css`:
 - **Footer**: Edit footer section in `index.html`
 - **Documentation**: Create/edit HTML files in `docs/` folder
 
-## SEO Optimization
+## ✅ Production-Ready Features
 
-Add to `<head>` section for better SEO:
+### SEO Optimization
+- ✅ **Advanced Meta Tags**: Title, description, keywords, canonical URLs on all pages
+- ✅ **Open Graph Tags**: Optimized for Facebook, LinkedIn sharing
+- ✅ **Twitter Cards**: Rich preview cards for Twitter
+- ✅ **Structured Data**: JSON-LD schema for SoftwareApplication, Organization, FAQPage
+- ✅ **XML Sitemap**: Complete sitemap.xml with all pages
+- ✅ **Robots.txt**: Optimized for search engine crawling
+- ✅ **Mobile-Responsive**: Perfect on all devices
+- ✅ **Fast Loading**: No JavaScript, minimal CSS (~10KB)
 
-```html
-<meta name="description" content="Causal Attribution API - Scientific marketing attribution using causal inference. 10-500x cheaper than competitors.">
-<meta name="keywords" content="marketing attribution, causal inference, API, data science">
-<meta property="og:title" content="Causal Attribution API">
-<meta property="og:description" content="Scientific marketing attribution powered by causal inference">
-<meta property="og:image" content="https://yoursite.com/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-```
+### Performance Optimization
+- ✅ **HTTP Headers**: Caching, compression, security headers
+- ✅ **_headers file**: For Netlify/Cloudflare Pages
+- ✅ **.htaccess file**: For Apache servers
+- ✅ **Resource Hints**: Preconnect, DNS-prefetch
+- ✅ **PWA Support**: Web manifest, favicons for all devices
 
-## Analytics
+### Analytics & Monitoring
+- ✅ **Analytics Templates**: Google Analytics 4, Microsoft Clarity, Plausible, Hotjar
+- ✅ **Event Tracking**: Custom event templates for key actions
+- ✅ **Ready to Deploy**: Just add your tracking IDs
 
-Add analytics tracking:
-
-**Google Analytics:**
-```html
-<!-- Add before </head> -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
-</script>
-```
+See **[analytics-setup.html](analytics-setup.html)** for implementation.
 
 ## Performance
 

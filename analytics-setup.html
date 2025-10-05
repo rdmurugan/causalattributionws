@@ -1,0 +1,189 @@
+<!--
+ANALYTICS SETUP TEMPLATE
+========================
+
+Copy the appropriate code snippet below and paste it into your HTML files
+BEFORE the closing </head> tag.
+
+IMPORTANT: Replace placeholder IDs with your actual tracking IDs
+-->
+
+<!-- ========================================= -->
+<!-- 1. GOOGLE ANALYTICS 4 (GA4) -->
+<!-- ========================================= -->
+<!--
+Most popular analytics solution
+Get tracking ID from: https://analytics.google.com/
+-->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA4 Measurement ID
+</script>
+
+
+<!-- ========================================= -->
+<!-- 2. GOOGLE TAG MANAGER (GTM) -->
+<!-- ========================================= -->
+<!--
+More flexible than GA4, allows managing multiple tags
+Get container ID from: https://tagmanager.google.com/
+-->
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Also add this immediately after opening <body> tag: -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- ========================================= -->
+<!-- 3. PLAUSIBLE ANALYTICS (Privacy-friendly) -->
+<!-- ========================================= -->
+<!--
+Privacy-focused, no cookies, GDPR compliant
+Get started at: https://plausible.io/
+-->
+
+<script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+
+
+<!-- ========================================= -->
+<!-- 4. MICROSOFT CLARITY -->
+<!-- ========================================= -->
+<!--
+Free heatmaps and session recordings
+Get project ID from: https://clarity.microsoft.com/
+-->
+
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "XXXXXXXXXX");
+</script>
+
+
+<!-- ========================================= -->
+<!-- 5. HOTJAR (Heatmaps & User Feedback) -->
+<!-- ========================================= -->
+<!--
+Heatmaps, recordings, and feedback
+Get site ID from: https://www.hotjar.com/
+-->
+
+<script>
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:XXXXXXX,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+
+<!-- ========================================= -->
+<!-- 6. SIMPLE ANALYTICS (Privacy-focused) -->
+<!-- ========================================= -->
+<!--
+Privacy-friendly alternative
+Get started at: https://simpleanalytics.com/
+-->
+
+<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+
+
+<!-- ========================================= -->
+<!-- RECOMMENDED SETUP FOR THIS PROJECT -->
+<!-- ========================================= -->
+
+<!--
+For Causal Attribution API website, we recommend:
+1. Google Analytics 4 (GA4) - for traffic and conversion tracking
+2. Microsoft Clarity - for understanding user behavior (free)
+
+Add both to index.html and all docs/*.html files:
+-->
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX', {
+    'anonymize_ip': true,  // GDPR compliance
+    'cookie_flags': 'SameSite=None;Secure'
+  });
+
+  // Track custom events
+  function trackAPIKeyRequest() {
+    gtag('event', 'api_key_request', {
+      'event_category': 'engagement',
+      'event_label': 'Get API Key'
+    });
+  }
+
+  function trackDocView(docName) {
+    gtag('event', 'documentation_view', {
+      'event_category': 'documentation',
+      'event_label': docName
+    });
+  }
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "XXXXXXXXXX");
+</script>
+
+
+<!-- ========================================= -->
+<!-- EVENT TRACKING EXAMPLES -->
+<!-- ========================================= -->
+
+<!--
+Add onclick handlers to track important actions:
+
+1. Track API key requests:
+   <a href="#contact" onclick="trackAPIKeyRequest()">Get API Key</a>
+
+2. Track documentation views:
+   <a href="docs/documentation.html" onclick="trackDocView('API Documentation')">Documentation</a>
+
+3. Track external links:
+   <a href="https://github.com/rdmurugan/causallm"
+      onclick="gtag('event', 'click', {'event_category': 'external_link', 'event_label': 'GitHub'})">
+      GitHub
+   </a>
+
+4. Track scroll depth:
+   <script>
+     window.addEventListener('scroll', function() {
+       const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+       if (scrollPercent > 75) {
+         gtag('event', 'scroll', {'event_category': 'engagement', 'event_label': '75% scroll'});
+       }
+     });
+   </script>
+-->

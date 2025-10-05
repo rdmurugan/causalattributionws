@@ -1,0 +1,168 @@
+/* Documentation Page Styles */
+
+.docs-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 20px;
+}
+
+.docs-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.docs-header h1 {
+    margin: 0;
+}
+
+.docs-nav {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.docs-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.docs-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.docs-nav a:hover {
+    text-decoration: underline;
+}
+
+.docs-content {
+    line-height: 1.8;
+}
+
+.docs-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.docs-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.docs-content pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1.5rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.docs-content code {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.docs-content p code {
+    background: #e5e7eb;
+    color: #1f2937;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+}
+
+.docs-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.docs-content th,
+.docs-content td {
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.docs-content th {
+    background: var(--bg-light);
+    font-weight: 600;
+}
+
+.docs-content ul,
+.docs-content ol {
+    margin: 1rem 0;
+    margin-left: 2rem;
+}
+
+.docs-content li {
+    margin: 0.5rem 0;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+}
+
+.alert.info {
+    background: #dbeafe;
+    border-color: var(--primary-color);
+    color: #1e40af;
+}
+
+.alert.success {
+    background: #d1fae5;
+    border-color: var(--success-color);
+    color: #065f46;
+}
+
+.alert.warning {
+    background: #fef3c7;
+    border-color: var(--warning-color);
+    color: #92400e;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+.back-to-top:hover {
+    background: #1d4ed8;
+    transform: translateY(-4px);
+}
+
+@media (max-width: 768px) {
+    .docs-nav ul {
+        flex-direction: column;
+    }
+
+    .docs-content pre {
+        font-size: 0.8rem;
+    }
+}

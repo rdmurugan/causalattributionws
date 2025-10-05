@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Causal Attribution API Documentation - Complete API Reference">
+    <title>API Documentation - Causal Attribution API</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">Causal Attribution API</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#features">Features</a></li>
+                <li><a href="../index.html#pricing">Pricing</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="../index.html#contact" class="cta-button">Get API Key</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="docs-header">
+        <div class="container">
+            <h1>API Documentation</h1>
+            <p>Complete reference for all endpoints, parameters, and responses</p>
+        </div>
+    </div>
+
+    <!-- Documentation Content -->
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="documentation.html">📘 API Reference</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="pricing.html">💰 Pricing</a></li>
+                <li><a href="benefits.html">🔬 Benefits</a></li>
+                <li><a href="agentic-ai.html">🤖 AI Integration</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <div class="alert info">
+                <p><strong>📄 Full Documentation Available on GitHub</strong></p>
+                <p>Complete API documentation is available in the GitHub repository:</p>
+                <p><a href="https://github.com/rdmurugan/causallm/tree/main/causalattribution" target="_blank">
+                    https://github.com/rdmurugan/causallm/tree/main/causalattribution
+                </a></p>
+            </div>
+
+            <h2>Quick Reference</h2>
+
+            <h3>Base URL</h3>
+            <pre><code>https://api.causalattribution.com</code></pre>
+
+            <h3>Authentication</h3>
+            <p>All requests require an API key in the <code>X-API-Key</code> header:</p>
+            <pre><code>X-API-Key: YOUR_API_KEY</code></pre>
+
+            <h3>Endpoints</h3>
+
+            <h4>1. Analyze Attribution</h4>
+            <p><code>POST /api/v1/attribution</code></p>
+            <p>Perform multi-touch attribution analysis using causal inference.</p>
+            <pre><code>{
+  "touchpoints": [
+    {
+      "customer_id": "c001",
+      "timestamp": "2025-10-01T10:00:00",
+      "channel": "google_ads",
+      "conversion": 0
+    },
+    {
+      "customer_id": "c001",
+      "timestamp": "2025-10-02T14:00:00",
+      "channel": "email",
+      "conversion": 1
+    }
+  ],
+  "attribution_model": "data_driven",
+  "conversion_window_days": 30
+}</code></pre>
+
+            <h4>2. Calculate Campaign ROI</h4>
+            <p><code>POST /api/v1/campaign-roi</code></p>
+            <p>Calculate ROI for marketing campaigns.</p>
+
+            <h4>3. Optimize Budget Allocation</h4>
+            <p><code>POST /api/v1/optimize-budget</code></p>
+            <p>Optimize budget distribution across channels.</p>
+
+            <h4>4. Health Check</h4>
+            <p><code>GET /health</code></p>
+            <p>Check API status (no authentication required).</p>
+
+            <h4>5. Agent Schema</h4>
+            <p><code>GET /api/v1/agent-schema</code></p>
+            <p>Get OpenAI/Anthropic function schemas for AI agents.</p>
+
+            <h3>Attribution Models</h3>
+            <ul>
+                <li><code>data_driven</code> - Causal inference using PC algorithm (recommended)</li>
+                <li><code>shapley</code> - Game theory-based attribution</li>
+                <li><code>first_touch</code> - 100% credit to first touchpoint</li>
+                <li><code>last_touch</code> - 100% credit to last touchpoint</li>
+                <li><code>linear</code> - Equal credit to all touchpoints</li>
+                <li><code>time_decay</code> - More credit to recent touchpoints</li>
+                <li><code>position_based</code> - 40% first, 40% last, 20% middle</li>
+            </ul>
+
+            <h3>Rate Limits</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Requests/Minute</th>
+                        <th>Monthly Touchpoints</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Free</td>
+                        <td>60</td>
+                        <td>1,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Starter</td>
+                        <td>300</td>
+                        <td>10,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Professional</td>
+                        <td>1,000</td>
+                        <td>100,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise</td>
+                        <td>Custom</td>
+                        <td>Unlimited</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Error Codes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>Success</td>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request - Invalid parameters</td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td>Unauthorized - Invalid API key</td>
+                    </tr>
+                    <tr>
+                        <td>429</td>
+                        <td>Too Many Requests - Rate limit exceeded</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Server Error</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><a href="getting-started.html">Getting Started Guide</a> - Step-by-step setup</li>
+                <li><a href="examples.html">Code Examples</a> - Working code in 6 languages</li>
+                <li><a href="https://github.com/rdmurugan/causallm/tree/main/causalattribution" target="_blank">Full Documentation on GitHub</a></li>
+            </ul>
+
+            <h2>Contact</h2>
+            <p>Questions about the API? Contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/rdmurugan/causallm/issues" target="_blank">Submit an issue</a></li>
+                <li><strong>Response time:</strong> 24-48 hours</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                        <li><a href="agentic-ai.html">AI Integration</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:durai@infinidatum.net">Email Support</a></li>
+                        <li><a href="https://github.com/rdmurugan/causallm/issues" target="_blank">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API. Built with scientific rigor.</p>
+                <p>Based on peer-reviewed academic research in causal inference.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+</body>
+</html>

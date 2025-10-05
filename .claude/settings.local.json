@@ -7,7 +7,9 @@
       "Bash(done)",
       "Bash(chmod:*)",
       "Bash(bash:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nProduction-ready deployment with advanced SEO optimization\n\n🚀 Complete website optimization for production deployment:\n\nSEO Enhancements:\n- Advanced meta tags (title, description, keywords, canonical URLs) on all pages\n- Open Graph tags for Facebook/LinkedIn sharing\n- Twitter Card tags for rich preview\n- JSON-LD structured data (SoftwareApplication, Organization, FAQPage)\n- XML sitemap with all 8 pages\n- Robots.txt for search engine crawling\n- PWA manifest for mobile devices\n\nPerformance Optimization:\n- HTTP headers for caching and security (_headers, .htaccess)\n- Resource hints (preconnect, DNS-prefetch)\n- Favicon and social media images generated\n- Mobile-responsive and fast-loading design\n\nAnalytics & Monitoring:\n- Analytics setup templates (GA4, Clarity, Plausible, Hotjar)\n- Custom event tracking examples\n- Ready for production deployment\n\nDocumentation:\n- PRODUCTION_DEPLOYMENT.md - Complete deployment guide\n- SEO_OPTIMIZATION_SUMMARY.md - Detailed optimization summary\n- analytics-setup.html - Analytics implementation guide\n- Updated README.md and CLAUDE.md\n\nAll pages optimized for search engines and ready for GitHub Pages deployment.\n\n🤖 Generated with Claude Code (https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

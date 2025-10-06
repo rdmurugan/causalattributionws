@@ -308,6 +308,93 @@
         </div>
     </section>
 
+    <!-- API vs SDK -->
+    <section class="features">
+        <div class="container">
+            <h2>Choose Your Deployment: Cloud API or Local SDK</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                Start with our cost-effective cloud API, or deploy our SDK locally if you have your own AI infrastructure.
+            </p>
+
+            <div class="comparison" style="margin-bottom: 3rem;">
+                <div class="traditional">
+                    <h3>☁️ Cloud API (Recommended)</h3>
+                    <h4 style="color: #2563eb; margin-top: 1rem;">Why It's Cost-Effective:</h4>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li><strong>Zero Infrastructure Costs:</strong> No servers, GPUs, or storage to buy or maintain</li>
+                        <li><strong>No DevOps Required:</strong> No setup, monitoring, scaling, or updates to manage</li>
+                        <li><strong>Pay Only for Usage:</strong> $149-$799/month vs. $10K+/month for infrastructure</li>
+                        <li><strong>Always Updated:</strong> Automatic access to latest models and improvements</li>
+                        <li><strong>Instant Scalability:</strong> Handle 10 or 10,000 requests without changes</li>
+                        <li><strong>Enterprise-Grade Uptime:</strong> 99.9% availability without your effort</li>
+                    </ul>
+
+                    <h4 style="color: #2563eb; margin-top: 1.5rem;">Total Cost Savings:</h4>
+                    <p style="margin: 1rem 0;"><strong>Self-hosted infrastructure:</strong></p>
+                    <ul style="text-align: left; margin: 0 0 1rem 0;">
+                        <li>Cloud GPU instances: $3,000-$8,000/month</li>
+                        <li>Storage & bandwidth: $500-$2,000/month</li>
+                        <li>DevOps engineer (part-time): $5,000-$10,000/month</li>
+                        <li>Monitoring & tools: $500-$1,000/month</li>
+                        <li><strong>Total: $9,000-$21,000/month</strong></li>
+                    </ul>
+
+                    <p style="margin: 1rem 0;"><strong>Our Cloud API:</strong> $149-$799/month</p>
+                    <p style="font-weight: 700; color: #059669; font-size: 1.2rem;">Save 95% on infrastructure costs!</p>
+
+                    <p style="margin-top: 1.5rem;"><a href="#pricing" class="button primary">See API Pricing →</a></p>
+                </div>
+
+                <div class="causal">
+                    <h3>🏢 Local SDK (Enterprise)</h3>
+                    <h4 style="color: #2563eb; margin-top: 1rem;">For Organizations With Local AI Infrastructure:</h4>
+                    <p style="margin: 1rem 0;">Already have GPUs and AI infrastructure? Deploy our SDK locally for maximum privacy and control.</p>
+
+                    <h4 style="color: #2563eb; margin-top: 1.5rem;">SDK Benefits:</h4>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li><strong>100% Data Privacy:</strong> Your data never leaves your servers</li>
+                        <li><strong>Zero Network Transfer:</strong> Process 10M rows in seconds (no upload/download)</li>
+                        <li><strong>Regulatory Compliance:</strong> Perfect for HIPAA, GDPR, SOC 2 requirements</li>
+                        <li><strong>Custom Integration:</strong> Embed into your existing data pipelines</li>
+                        <li><strong>Centralized Management:</strong> Our control plane manages licenses & updates</li>
+                        <li><strong>Offline Capable:</strong> Works without internet connectivity</li>
+                    </ul>
+
+                    <h4 style="color: #2563eb; margin-top: 1.5rem;">How SDK Works:</h4>
+                    <div style="background: #f0f9ff; padding: 1rem; border-radius: 6px; text-align: left; margin: 1rem 0;">
+                        <p style="margin: 0 0 0.5rem 0;"><strong>1. Install locally:</strong> <code style="background: white; padding: 0.2rem 0.5rem;">pip install causalattribution-client</code></p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong>2. Algorithms run on your machine:</strong> Data stays 100% local</p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong>3. Control plane validates license:</strong> Metadata only (no data sent)</p>
+                        <p style="margin: 0;"><strong>4. Results computed locally:</strong> 30x faster for large datasets</p>
+                    </div>
+
+                    <p style="margin-top: 1.5rem;"><a href="#contact" class="button secondary">Contact for SDK →</a></p>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 2rem; background: #f0f9ff; border-left: 4px solid #2563eb;">
+                <h3 style="margin-top: 0; color: #2563eb;">Which Should You Choose?</h3>
+                <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                    <p style="margin: 1rem 0;"><strong>Choose Cloud API if:</strong></p>
+                    <ul style="margin: 0 0 1.5rem 1.5rem;">
+                        <li>You want to minimize costs and eliminate infrastructure overhead</li>
+                        <li>You need quick integration (under 10 minutes)</li>
+                        <li>You process less than 1M rows per analysis</li>
+                        <li>You prefer simplicity and no maintenance burden</li>
+                    </ul>
+
+                    <p style="margin: 1rem 0;"><strong>Choose Local SDK if:</strong></p>
+                    <ul style="margin: 0 0 1rem 1.5rem;">
+                        <li>You already have AI infrastructure (GPUs, servers)</li>
+                        <li>You have strict data privacy requirements (HIPAA, GDPR)</li>
+                        <li>You process massive datasets (10M+ rows regularly)</li>
+                        <li>You need offline/air-gapped deployment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing -->
     <section id="pricing" class="pricing">
         <div class="container">

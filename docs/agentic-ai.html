@@ -125,10 +125,10 @@ functions = [
 def analyze_causal_attribution(touchpoints, conversion, model="data_driven"):
     """Call the Causal Attribution API"""
     api_key = "YOUR_API_KEY"
-    url = "https://api.causalattribution.com/v1/attribute"
+    url = "https://causalattribution.onrender.com/api/v1/attribution"
 
     headers = {
-        "Authorization": f"Bearer {api_key}",
+        "X-API-Key": f"{api_key}",
         "Content-Type": "application/json"
     }
 
@@ -236,10 +236,10 @@ def process_tool_call(tool_name, tool_input):
     """Execute the attribution API call"""
     if tool_name == "causal_attribution_analysis":
         api_key = "YOUR_CAUSAL_ATTRIBUTION_API_KEY"
-        url = "https://api.causalattribution.com/v1/attribute"
+        url = "https://causalattribution.onrender.com/api/v1/attribution"
 
         headers = {
-            "Authorization": f"Bearer {api_key}",
+            "X-API-Key": f"{api_key}",
             "Content-Type": "application/json"
         }
 
@@ -323,10 +323,10 @@ class CausalAttributionTool(BaseTool):
     def _run(self, touchpoints: list, conversion: dict, model: str = "data_driven") -> dict:
         """Execute the attribution analysis"""
         api_key = "YOUR_API_KEY"
-        url = "https://api.causalattribution.com/v1/attribute"
+        url = "https://causalattribution.onrender.com/api/v1/attribution"
 
         headers = {
-            "Authorization": f"Bearer {api_key}",
+            "X-API-Key": f"{api_key}",
             "Content-Type": "application/json"
         }
 
@@ -377,12 +377,12 @@ class MarketingAttributionAgent:
     def __init__(self, attribution_api_key: str, llm_api_key: str):
         self.attribution_api_key = attribution_api_key
         self.llm_api_key = llm_api_key
-        self.base_url = "https://api.causalattribution.com/v1"
+        self.base_url = "https://causalattribution.onrender.com/api/v1"
 
     def analyze_journey(self, touchpoints: List[Dict], conversion: Dict) -> Dict:
         """Perform causal attribution analysis"""
         headers = {
-            "Authorization": f"Bearer {self.attribution_api_key}",
+            "X-API-Key": f"{self.attribution_api_key}",
             "Content-Type": "application/json"
         }
 
@@ -397,7 +397,7 @@ class MarketingAttributionAgent:
         }
 
         response = requests.post(
-            f"{self.base_url}/attribute",
+            f"{self.base_url}/attribution",
             headers=headers,
             json=payload
         )

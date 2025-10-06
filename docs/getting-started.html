@@ -90,15 +90,15 @@
 
             <h3>Step 2: Authentication</h3>
             <p>The API uses API key authentication. Include your API key in the request headers:</p>
-            <pre><code>Authorization: Bearer YOUR_API_KEY
+            <pre><code>X-API-Key: YOUR_API_KEY
 Content-Type: application/json</code></pre>
 
             <h3>Step 3: Make Your First Request</h3>
             <p>Here's a simple example using cURL to analyze attribution for a customer journey:</p>
 
             <h4>cURL Example</h4>
-            <pre><code>curl -X POST https://api.causalattribution.com/v1/attribute \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+            <pre><code>curl -X POST https://causalattribution.onrender.com/api/v1/attribution \
+  -H "X-API-Key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "touchpoints": [
@@ -133,10 +133,10 @@ Content-Type: application/json</code></pre>
             <pre><code>import requests
 
 api_key = "YOUR_API_KEY"
-url = "https://api.causalattribution.com/v1/attribute"
+url = "https://causalattribution.onrender.com/api/v1/attribution"
 
 headers = {
-    "Authorization": f"Bearer {api_key}",
+    "X-API-Key": f"{api_key}",
     "Content-Type": "application/json"
 }
 
@@ -174,7 +174,7 @@ print(response.json())</code></pre>
 
             <h4>JavaScript Example</h4>
             <pre><code>const apiKey = 'YOUR_API_KEY';
-const url = 'https://api.causalattribution.com/v1/attribute';
+const url = 'https://causalattribution.onrender.com/api/v1/attribution';
 
 const data = {
   touchpoints: [
@@ -208,7 +208,7 @@ const data = {
 fetch(url, {
   method: 'POST',
   headers: {
-    'Authorization': `Bearer ${apiKey}`,
+    'X-API-Key': `${apiKey}`,
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(data)

@@ -77,8 +77,8 @@
 
             <h3>cURL</h3>
             <p>Basic command-line example for testing the API:</p>
-            <pre><code>curl -X POST https://api.causalattribution.com/v1/attribute \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+            <pre><code>curl -X POST https://causalattribution.onrender.com/api/v1/attribution \
+  -H "X-API-Key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "touchpoints": [
@@ -125,9 +125,9 @@ import json
 class CausalAttributionAPI:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.base_url = "https://api.causalattribution.com/v1"
+        self.base_url = "https://causalattribution.onrender.com/api/v1"
         self.headers = {
-            "Authorization": f"Bearer {api_key}",
+            "X-API-Key": f"{api_key}",
             "Content-Type": "application/json"
         }
 
@@ -144,7 +144,7 @@ class CausalAttributionAPI:
         Returns:
             Attribution results dictionary
         """
-        endpoint = f"{self.base_url}/attribute"
+        endpoint = f"{self.base_url}/attribution"
 
         payload = {
             "touchpoints": touchpoints,
@@ -170,7 +170,7 @@ class CausalAttributionAPI:
         Returns:
             Batch attribution results
         """
-        endpoint = f"{self.base_url}/batch-attribute"
+        endpoint = f"{self.base_url}/batch-attribution"
 
         payload = {"journeys": journeys}
 
@@ -220,9 +220,9 @@ if __name__ == "__main__":
 class CausalAttributionAPI {
   constructor(apiKey) {
     this.apiKey = apiKey;
-    this.baseURL = 'https://api.causalattribution.com/v1';
+    this.baseURL = "https://causalattribution.onrender.com/api/v1";
     this.headers = {
-      'Authorization': `Bearer ${apiKey}`,
+      'X-API-Key': `${apiKey}`,
       'Content-Type': 'application/json'
     };
   }
@@ -312,7 +312,7 @@ class CausalAttributionAPI {
 
 class CausalAttributionAPI {
     private $apiKey;
-    private $baseURL = 'https://api.causalattribution.com/v1';
+    private $baseURL = "https://causalattribution.onrender.com/api/v1";
 
     public function __construct($apiKey) {
         $this->apiKey = $apiKey;
@@ -337,7 +337,7 @@ class CausalAttributionAPI {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' . $this->apiKey,
+            'X-API-Key: ' . $this->apiKey,
             'Content-Type: application/json'
         ]);
 
@@ -392,11 +392,11 @@ require 'uri'
 class CausalAttributionAPI
   def initialize(api_key)
     @api_key = api_key
-    @base_url = 'https://api.causalattribution.com/v1'
+    @base_url = "https://causalattribution.onrender.com/api/v1"
   end
 
   def analyze_attribution(touchpoints:, conversion:, model: 'data_driven', options: {})
-    uri = URI("#{@base_url}/attribute")
+    uri = URI("#{@base_url}/attribution")
 
     payload = {
       touchpoints: touchpoints,
@@ -410,7 +410,7 @@ class CausalAttributionAPI
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri.path)
-    request['Authorization'] = "Bearer #{@api_key}"
+    request["X-API-Key"] = "#{@api_key}"
     request['Content-Type'] = 'application/json'
     request.body = payload.to_json
 
@@ -464,7 +464,7 @@ CausalAttributionAPI <- R6::R6Class(
 
   private = list(
     api_key = NULL,
-    base_url = "https://api.causalattribution.com/v1"
+    base_url = "https://causalattribution.onrender.com/api/v1"
   ),
 
   public = list(
@@ -473,7 +473,7 @@ CausalAttributionAPI <- R6::R6Class(
     },
 
     analyze_attribution = function(touchpoints, conversion, model = "data_driven", options = list()) {
-      endpoint <- paste0(private$base_url, "/attribute")
+      endpoint <- paste0(private$base_url, "/attribution")
 
       payload <- list(
         touchpoints = touchpoints,
@@ -488,7 +488,7 @@ CausalAttributionAPI <- R6::R6Class(
       response <- POST(
         endpoint,
         add_headers(
-          "Authorization" = paste("Bearer", private$api_key),
+          "X-API-Key" = private$api_key),
           "Content-Type" = "application/json"
         ),
         body = toJSON(payload, auto_unbox = TRUE),

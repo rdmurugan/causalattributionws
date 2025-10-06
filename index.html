@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>Causal Attribution API - Scientific Marketing Attribution Using Causal Inference</title>
     <meta name="title" content="Causal Attribution API - Scientific Marketing Attribution Using Causal Inference">
-    <meta name="description" content="Scientific marketing attribution powered by causal inference. Discover which channels actually cause conversions. Professional-grade solution 60-75% more affordable than competitors. Starting at $99/month.">
+    <meta name="description" content="Scientific marketing attribution powered by causal inference. Discover which channels actually cause conversions. Pay-as-you-go pricing: $0.001 per request + $0.00001 per touchpoint. 10-500x more affordable than competitors.">
     <meta name="keywords" content="marketing attribution, causal inference, attribution modeling, data-driven attribution, marketing analytics API, propensity score matching, causal analysis, marketing ROI, multi-touch attribution, conversion attribution, shapley value attribution">
     <meta name="author" content="Causal Attribution API">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rdmurugan.github.io/causallm/">
     <meta property="og:title" content="Causal Attribution API - Scientific Marketing Attribution">
-    <meta property="og:description" content="Scientific marketing attribution powered by causal inference. Discover which channels actually cause conversions, not just correlate. 60-75% more affordable than competitors.">
+    <meta property="og:description" content="Scientific marketing attribution powered by causal inference. Discover which channels actually cause conversions, not just correlate. 10-500x more affordable than competitors.">
     <meta property="og:image" content="https://rdmurugan.github.io/causallm/images/og-image.png">
     <meta property="og:site_name" content="Causal Attribution API">
     <meta property="og:locale" content="en_US">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://rdmurugan.github.io/causallm/">
     <meta name="twitter:title" content="Causal Attribution API - Scientific Marketing Attribution">
-    <meta name="twitter:description" content="Scientific marketing attribution powered by causal inference. Professional-grade solution 60-75% more affordable than competitors. Starting at $99/month.">
+    <meta name="twitter:description" content="Scientific marketing attribution powered by causal inference. Pay-as-you-go pricing: 10-500x more affordable than competitors. No monthly minimums.">
     <meta name="twitter:image" content="https://rdmurugan.github.io/causallm/images/og-image.png">
 
     <!-- Favicon -->
@@ -55,13 +55,13 @@
       "description": "Scientific marketing attribution powered by causal inference. Discover which channels actually cause conversions using peer-reviewed statistical methods.",
       "offers": {
         "@type": "Offer",
-        "price": "99.00",
+        "price": "0.001",
         "priceCurrency": "USD",
         "priceSpecification": {
           "@type": "UnitPriceSpecification",
-          "price": "99.00",
+          "price": "0.001",
           "priceCurrency": "USD",
-          "unitText": "per month"
+          "unitText": "per API request"
         }
       },
       "creator": {
@@ -123,7 +123,7 @@
           "name": "How much does the Causal Attribution API cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The API offers professional-grade pricing starting at $99/month for the Starter plan (50,000 touchpoints), $299/month for Professional (250,000 touchpoints), and $799/month for Business (1M touchpoints). This is 60-75% more affordable than competitors like Windsor.ai ($399/mo), Northbeam ($1,000/mo), or Rockerbox ($2,500/mo)."
+            "text": "The API uses simple pay-as-you-go pricing: $0.001 per API request + $0.00001 per touchpoint processed. For example, 100,000 touchpoints costs ~$1.50/month, and 1M touchpoints costs ~$12/month. This is 10-500x more affordable than competitors like Windsor.ai ($399/mo), Northbeam ($1,000/mo), or Rockerbox ($2,500/mo). No monthly minimums, no setup fees."
           }
         },
         {
@@ -165,8 +165,9 @@
                 <a href="docs/getting-started.html" class="button secondary">Quick Start →</a>
             </div>
             <div class="code-example">
-                <pre><code>curl -X POST https://api.causalattribution.com/api/v1/attribution \
+                <pre><code>curl -X POST https://causalattribution.onrender.com/api/v1/attribution \
   -H "X-API-Key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
   -d '{
     "touchpoints": [...],
     "attribution_model": "data_driven"
@@ -220,22 +221,22 @@
                     </ul>
                 </div>
                 <div class="feature">
-                    <h3>💰 60-75% More Affordable</h3>
-                    <p>Professional-grade pricing that's competitive:</p>
+                    <h3>💰 10-500x More Affordable</h3>
+                    <p>Pay-as-you-go pricing - only pay for what you use:</p>
                     <ul>
-                        <li>Starter: $99/month (50K touchpoints)</li>
-                        <li>Professional: $299/mo (250K touchpoints)</li>
-                        <li>Business: $799/mo (1M touchpoints)</li>
-                        <li>Enterprise: Custom pricing</li>
+                        <li>$0.001 per API request</li>
+                        <li>$0.00001 per touchpoint processed</li>
+                        <li>100K touchpoints: ~$1.50/month</li>
+                        <li>1M touchpoints: ~$12/month</li>
                     </ul>
                 </div>
                 <div class="feature">
                     <h3>⚡ Production-Ready</h3>
                     <p>Built for scale and reliability:</p>
                     <ul>
-                        <li>< 5 sec for 100K touchpoints</li>
+                        <li>Fast response times (30-100ms typical)</li>
                         <li>Handles millions of touchpoints</li>
-                        <li>Automatic chunking for large datasets</li>
+                        <li>Auto-scaling on cloud infrastructure</li>
                         <li>Comprehensive error handling</li>
                     </ul>
                 </div>
@@ -276,61 +277,62 @@
     <!-- Pricing -->
     <section id="pricing" class="pricing">
         <div class="container">
-            <h2>Transparent Pricing</h2>
-            <p class="subtitle">Professional-grade causal attribution that's significantly more affordable than competitors.</p>
+            <h2>Simple Pay-As-You-Go Pricing</h2>
+            <p class="subtitle">Only pay for what you use - no monthly minimums, no hidden fees.</p>
 
             <div class="pricing-grid">
                 <div class="pricing-tier">
-                    <h3>Starter</h3>
-                    <p class="price">$99/month</p>
+                    <h3>Small Business</h3>
+                    <p class="price">~$1.50/month</p>
                     <ul>
-                        <li>Up to 50,000 touchpoints/mo</li>
-                        <li>1,000 API calls/mo</li>
+                        <li>100,000 touchpoints/mo</li>
+                        <li>500 API calls/mo</li>
                         <li>All 7 attribution models</li>
                         <li>Email support</li>
-                        <li>API documentation access</li>
-                    </ul>
-                    <p class="compare">vs $399/mo (Windsor.ai)</p>
-                    <p class="savings">75% more affordable</p>
-                </div>
-                <div class="pricing-tier featured">
-                    <div class="badge">Popular</div>
-                    <h3>Professional</h3>
-                    <p class="price">$299/month</p>
-                    <ul>
-                        <li>Up to 250,000 touchpoints/mo</li>
-                        <li>5,000 API calls/mo</li>
-                        <li>All attribution models + custom</li>
-                        <li>Priority email support</li>
-                        <li>Dedicated onboarding</li>
-                        <li>Advanced analytics dashboard</li>
+                        <li>Full API documentation</li>
                     </ul>
                     <p class="compare">vs $1,000/mo (Northbeam)</p>
-                    <p class="savings">70% more affordable</p>
+                    <p class="savings">99.85% more affordable</p>
                 </div>
-                <div class="pricing-tier">
-                    <h3>Business</h3>
-                    <p class="price">$799/month</p>
+                <div class="pricing-tier featured">
+                    <div class="badge">Most Popular</div>
+                    <h3>Mid-Market</h3>
+                    <p class="price">~$12/month</p>
                     <ul>
-                        <li>Up to 1M touchpoints/mo</li>
-                        <li>20,000 API calls/mo</li>
-                        <li>Custom attribution models</li>
-                        <li>Phone & email support</li>
-                        <li>Technical account manager</li>
-                        <li>Quarterly business reviews</li>
+                        <li>1,000,000 touchpoints/mo</li>
+                        <li>2,000 API calls/mo</li>
+                        <li>All causal inference methods</li>
+                        <li>Priority email support</li>
+                        <li>Advanced statistical analysis</li>
+                        <li>Automatic volume discounts</li>
                     </ul>
                     <p class="compare">vs $2,500/mo (Rockerbox)</p>
-                    <p class="savings">68% more affordable</p>
+                    <p class="savings">99.5% more affordable</p>
+                </div>
+                <div class="pricing-tier">
+                    <h3>Enterprise</h3>
+                    <p class="price">~$105/month</p>
+                    <ul>
+                        <li>10,000,000 touchpoints/mo</li>
+                        <li>5,000 API calls/mo</li>
+                        <li>Custom attribution models</li>
+                        <li>Phone & email support</li>
+                        <li>Dedicated account manager</li>
+                        <li>Up to 60% volume discount</li>
+                    </ul>
+                    <p class="compare">vs $10,000/mo (Measured)</p>
+                    <p class="savings">98.95% more affordable</p>
                 </div>
             </div>
 
             <div class="enterprise-note">
-                <h3>Enterprise</h3>
-                <p>Custom pricing for 1M+ touchpoints/month. Includes dedicated support, SLA guarantees, custom integrations, and white-label options.</p>
-                <p><strong>Starting at $1,500/month</strong> · Contact us for pricing</p>
+                <h3>Pay-As-You-Go Pricing</h3>
+                <p><strong>$0.001</strong> per API request + <strong>$0.00001</strong> per touchpoint processed</p>
+                <p>Automatic volume discounts: 20% off at 1M+ touchpoints, 40% off at 10M+, 60% off at 100M+</p>
+                <p><strong>No monthly minimums</strong> · <strong>No setup fees</strong> · <strong>Cancel anytime</strong></p>
             </div>
 
-            <p class="pricing-note">All plans include: Scientific causal inference methods • Propensity Score Matching • Doubly Robust Estimation • Real-time API access • 99.9% uptime SLA</p>
+            <p class="pricing-note">All tiers include: Scientific causal inference methods • PC Algorithm • Propensity Score Matching • Doubly Robust Estimation • Instrumental Variables • Statistical significance testing • Real-time API access</p>
             <a href="docs/pricing.html" class="button secondary">View Detailed Pricing →</a>
         </div>
     </section>

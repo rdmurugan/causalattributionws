@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://causalattribution.onrender.com/sitemap.xml
+Sitemap: https://causalmma.com/sitemap.xml
 
 # Disallow specific files/directories
 Disallow: /css/

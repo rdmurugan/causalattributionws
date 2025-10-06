@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Causal Attribution API</title>
+    <link rel="icon" type="image/png" href="../favicon-32x32.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">Causal Attribution API</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="api.html">API Docs</a></li>
+                <li><a href="../index.html#contact" class="cta-button">Get API Key</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="api.html">📘 API Reference</a></li>
+                <li><a href="quickstart.html">🚀 Quick Start</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="../index.html#pricing">💰 Pricing</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h1>API Documentation</h1>
+
+            <h2>Base URL</h2>
+            <pre><code>https://causalattribution.onrender.com</code></pre>
+
+            <h2>Authentication</h2>
+            <p>All API requests require an API key sent in the header:</p>
+            <pre><code>X-API-Key: YOUR_API_KEY</code></pre>
+
+            <p>Get your API key by emailing <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></p>
+
+            <hr>
+
+            <h2>Main Endpoint: Attribution Analysis</h2>
+
+            <h3>POST /api/v1/attribution</h3>
+            <p>Analyze multi-touch attribution across customer touchpoints.</p>
+
+            <h4>Request</h4>
+            <pre><code>{
+  "touchpoints": [
+    {
+      "customer_id": "c1",
+      "timestamp": "2025-01-01T10:00:00",
+      "channel": "email",
+      "conversion": 0
+    },
+    {
+      "customer_id": "c1",
+      "timestamp": "2025-01-01T12:00:00",
+      "channel": "paid_search",
+      "conversion": 1,
+      "conversion_value": 100
+    }
+  ],
+  "attribution_model": "data_driven"
+}</code></pre>
+
+            <h4>Parameters</h4>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>touchpoints</td>
+                    <td>array</td>
+                    <td>Yes</td>
+                    <td>List of customer touchpoints</td>
+                </tr>
+                <tr>
+                    <td>attribution_model</td>
+                    <td>string</td>
+                    <td>Yes</td>
+                    <td>Model to use (see below)</td>
+                </tr>
+            </table>
+
+            <h4>Touchpoint Object</h4>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>customer_id</td>
+                    <td>string</td>
+                    <td>Yes</td>
+                    <td>Unique customer identifier</td>
+                </tr>
+                <tr>
+                    <td>timestamp</td>
+                    <td>string</td>
+                    <td>Yes</td>
+                    <td>ISO 8601 format</td>
+                </tr>
+                <tr>
+                    <td>channel</td>
+                    <td>string</td>
+                    <td>Yes</td>
+                    <td>Marketing channel name</td>
+                </tr>
+                <tr>
+                    <td>conversion</td>
+                    <td>integer</td>
+                    <td>Yes</td>
+                    <td>1 if converted, 0 otherwise</td>
+                </tr>
+                <tr>
+                    <td>conversion_value</td>
+                    <td>number</td>
+                    <td>No</td>
+                    <td>Revenue from conversion</td>
+                </tr>
+            </table>
+
+            <h4>Attribution Models</h4>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td>data_driven</td>
+                    <td>Statistical causal inference</td>
+                    <td>Most accurate results</td>
+                </tr>
+                <tr>
+                    <td>shapley</td>
+                    <td>Game-theoretic fair credit</td>
+                    <td>Provably fair attribution</td>
+                </tr>
+                <tr>
+                    <td>time_decay</td>
+                    <td>More recent = more credit</td>
+                    <td>Recency-focused campaigns</td>
+                </tr>
+                <tr>
+                    <td>position</td>
+                    <td>First & last touch emphasized</td>
+                    <td>Awareness + conversion</td>
+                </tr>
+                <tr>
+                    <td>linear</td>
+                    <td>Equal credit to all</td>
+                    <td>Baseline comparison</td>
+                </tr>
+                <tr>
+                    <td>first_touch</td>
+                    <td>All credit to first</td>
+                    <td>Awareness campaigns</td>
+                </tr>
+                <tr>
+                    <td>last_touch</td>
+                    <td>All credit to last</td>
+                    <td>Conversion focus</td>
+                </tr>
+            </table>
+
+            <h4>Response</h4>
+            <pre><code>{
+  "attribution_weights": {
+    "email": 0.45,
+    "paid_search": 0.55
+  },
+  "attributed_revenue": {
+    "email": 45.00,
+    "paid_search": 55.00
+  },
+  "confidence_intervals": {
+    "email": {"lower": 0.38, "upper": 0.52},
+    "paid_search": {"lower": 0.48, "upper": 0.62}
+  },
+  "p_values": {
+    "email": 0.001,
+    "paid_search": 0.0001
+  },
+  "method_used": "doubly_robust",
+  "total_revenue": 100.00
+}</code></pre>
+
+            <hr>
+
+            <h2>Advanced Causal Inference Endpoints</h2>
+
+            <h3>POST /api/v1/causal/discover-structure</h3>
+            <p>Discover causal relationships between variables using the PC Algorithm.</p>
+            <pre><code>{
+  "data": [
+    {"age": 25, "income": 50000, "treatment": 1, "outcome": 100},
+    {"age": 30, "income": 60000, "treatment": 0, "outcome": 80}
+  ],
+  "variables": ["age", "income", "treatment", "outcome"],
+  "algorithm": "pc",
+  "significance_level": 0.05
+}</code></pre>
+
+            <h3>POST /api/v1/causal/propensity-score</h3>
+            <p>Estimate treatment effects using propensity score matching.</p>
+            <pre><code>{
+  "data": [...],
+  "treatment_variable": "treatment",
+  "outcome_variable": "outcome",
+  "covariates": ["age", "income"],
+  "caliper": 0.1
+}</code></pre>
+
+            <h3>POST /api/v1/causal/instrumental-variables</h3>
+            <p>Two-stage least squares estimation with instrumental variables.</p>
+            <pre><code>{
+  "data": [...],
+  "instrument_variable": "instrument",
+  "treatment_variable": "treatment",
+  "outcome_variable": "outcome",
+  "confounders": ["confounder"]
+}</code></pre>
+
+            <hr>
+
+            <h2>Utility Endpoints</h2>
+
+            <h3>GET /health</h3>
+            <p>Check API health status.</p>
+            <pre><code>curl https://causalattribution.onrender.com/health</code></pre>
+
+            <h3>GET /docs</h3>
+            <p>Interactive API documentation (Swagger UI).</p>
+            <p><a href="https://causalattribution.onrender.com/docs" target="_blank">View Interactive Docs →</a></p>
+
+            <hr>
+
+            <h2>Rate Limits</h2>
+            <table>
+                <tr>
+                    <th>Tier</th>
+                    <th>Requests/Minute</th>
+                    <th>Monthly Requests</th>
+                </tr>
+                <tr>
+                    <td>Free</td>
+                    <td>10</td>
+                    <td>1,000</td>
+                </tr>
+                <tr>
+                    <td>Starter</td>
+                    <td>100</td>
+                    <td>10,000</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>500</td>
+                    <td>100,000</td>
+                </tr>
+                <tr>
+                    <td>Enterprise</td>
+                    <td>Custom</td>
+                    <td>Unlimited</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2>Error Responses</h2>
+            <p>All errors return a JSON response with details:</p>
+            <pre><code>{
+  "error": "Invalid API key",
+  "status": 401
+}</code></pre>
+
+            <h4>Common Error Codes</h4>
+            <table>
+                <tr>
+                    <th>Code</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>Bad Request - Invalid parameters</td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>Unauthorized - Invalid API key</td>
+                </tr>
+                <tr>
+                    <td>429</td>
+                    <td>Too Many Requests - Rate limit exceeded</td>
+                </tr>
+                <tr>
+                    <td>500</td>
+                    <td>Internal Server Error</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2>Need Help?</h2>
+            <p>Email: <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></p>
+            <p>Response time: Usually within 24 hours</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Causal Attribution API</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZGTD1T57S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DZGTD1T57S');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDK Documentation - Causal Attribution API</title>
+    <meta name="description" content="Complete SDK documentation for Causal MMA. Install locally for maximum data privacy, offline processing, and integration with your infrastructure.">
+    <meta name="keywords" content="causal attribution SDK, Python SDK, local deployment, data privacy, offline attribution, enterprise SDK">
+    <meta name="author" content="Causal Attribution API">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://causalmma.com/docs/sdk.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://causalmma.com/docs/sdk.html">
+    <meta property="og:title" content="SDK Documentation - Causal Attribution API">
+    <meta property="og:description" content="Install and use the Causal MMA SDK locally for maximum data privacy and offline processing.">
+    <meta property="og:image" content="https://causalmma.com/images/causalmmalogo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://causalmma.com/docs/sdk.html">
+    <meta property="twitter:title" content="SDK Documentation - Causal Attribution API">
+    <meta property="twitter:description" content="Install and use the Causal MMA SDK locally for maximum data privacy.">
+    <meta property="twitter:image" content="https://causalmma.com/images/causalmmalogo.png">
+
+    <link rel="icon" type="image/png" href="../favicon-32x32.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "SDK Documentation - Causal Attribution API",
+      "description": "Complete SDK documentation for local deployment of Causal MMA",
+      "url": "https://causalmma.com/docs/sdk.html",
+      "author": {
+        "@type": "Organization",
+        "name": "Causal Attribution API"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Causal MMA",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://causalmma.com/images/causalmmalogo.png"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="../images/causalmmalogo.png" alt="Causal MMA Logo" style="height: 150px; margin-right: 25px;">
+                    <span style="color: inherit; font-size: 1.5rem; font-weight: 700;">Causal MMA</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="api.html">API Docs</a></li>
+                <li><a href="sdk.html">SDK Docs</a></li>
+                <li><a href="../index.html#contact" class="cta-button">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="docs-container">
+        <nav class="docs-nav">
+            <ul>
+                <li><a href="api.html">📘 API Reference</a></li>
+                <li><a href="sdk.html">🔧 SDK Documentation</a></li>
+                <li><a href="quickstart.html">🚀 Quick Start</a></li>
+                <li><a href="examples.html">💻 Examples</a></li>
+                <li><a href="../index.html#pricing">💰 Pricing</a></li>
+            </ul>
+        </nav>
+
+        <div class="docs-content">
+            <h1>SDK Documentation</h1>
+            <p>Deploy Causal MMA locally for maximum data privacy, offline processing, and seamless integration with your infrastructure.</p>
+
+            <div style="background: #f0f9ff; padding: 1.5rem; border-left: 4px solid #2563eb; margin: 2rem 0;">
+                <h3 style="margin-top: 0; color: #2563eb;">Cloud API vs Local SDK</h3>
+                <p style="margin: 0.5rem 0;"><strong>Cloud API:</strong> Best for most users. Zero infrastructure costs, instant setup, $149-$799/month.</p>
+                <p style="margin: 0;"><strong>Local SDK:</strong> For enterprises with existing AI infrastructure, strict data privacy requirements, or massive datasets (10M+ rows). <a href="../index.html#contact">Contact us for SDK access →</a></p>
+            </div>
+
+            <hr>
+
+            <h2>Installation</h2>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li>Python 3.8 or higher</li>
+                <li>Valid SDK license key (contact us at <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a>)</li>
+                <li>Recommended: GPU for large datasets (optional, CPU works fine for &lt; 1M rows)</li>
+            </ul>
+
+            <h3>Install via pip</h3>
+            <pre><code>pip install causalattribution-client</code></pre>
+
+            <h3>Verify Installation</h3>
+            <pre><code>python -c "import causalattribution_client; print(causalattribution_client.__version__)"</code></pre>
+
+            <hr>
+
+            <h2>Quick Start</h2>
+
+            <h3>Initialize the Client</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+# Initialize with your license key
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# For offline/air-gapped deployments (no license validation)
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY", offline_mode=True)</code></pre>
+
+            <h3>Basic Attribution Analysis</h3>
+            <pre><code>import pandas as pd
+from causalattribution_client import CausalMMAClient
+
+# Initialize client
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# Prepare your data
+touchpoints = pd.DataFrame([
+    {"customer_id": "c1", "timestamp": "2025-01-01T10:00:00", "channel": "email", "conversion": 0},
+    {"customer_id": "c1", "timestamp": "2025-01-01T12:00:00", "channel": "facebook", "conversion": 0},
+    {"customer_id": "c1", "timestamp": "2025-01-01T14:00:00", "channel": "paid_search", "conversion": 1, "conversion_value": 150.0}
+])
+
+# Run attribution analysis
+results = client.analyze_attribution(
+    touchpoints=touchpoints,
+    attribution_model="data_driven",
+    options={
+        "confidence_interval": 0.95,
+        "return_causal_graph": True
+    }
+)
+
+print(results)</code></pre>
+
+            <h4>Response</h4>
+            <pre><code>{
+    "attribution_weights": {
+        "email": 0.35,
+        "facebook": 0.25,
+        "paid_search": 0.40
+    },
+    "attributed_revenue": {
+        "email": 52.50,
+        "facebook": 37.50,
+        "paid_search": 60.00
+    },
+    "confidence_intervals": {
+        "email": {"lower": 0.28, "upper": 0.42},
+        "facebook": {"lower": 0.18, "upper": 0.32},
+        "paid_search": {"lower": 0.33, "upper": 0.47}
+    },
+    "p_values": {
+        "email": 0.002,
+        "facebook": 0.015,
+        "paid_search": 0.0001
+    },
+    "method_used": "doubly_robust",
+    "total_revenue": 150.00,
+    "causal_graph": {...}
+}</code></pre>
+
+            <hr>
+
+            <h2>Attribution Models</h2>
+
+            <p>The SDK supports all the same attribution models as the cloud API:</p>
+
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Best For</th>
+                    <th>Method</th>
+                </tr>
+                <tr>
+                    <td><code>data_driven</code></td>
+                    <td>AI-powered causal inference</td>
+                    <td>Most accurate results</td>
+                    <td>Doubly Robust Estimation</td>
+                </tr>
+                <tr>
+                    <td><code>shapley</code></td>
+                    <td>Game-theoretic fair credit</td>
+                    <td>Provably fair attribution</td>
+                    <td>Shapley Values</td>
+                </tr>
+                <tr>
+                    <td><code>propensity_score</code></td>
+                    <td>Propensity score matching</td>
+                    <td>Comparing similar customers</td>
+                    <td>PSM with caliper matching</td>
+                </tr>
+                <tr>
+                    <td><code>instrumental_variables</code></td>
+                    <td>Two-stage least squares</td>
+                    <td>Handling unmeasured confounding</td>
+                    <td>2SLS with IV validation</td>
+                </tr>
+                <tr>
+                    <td><code>time_decay</code></td>
+                    <td>Recency-weighted attribution</td>
+                    <td>Recent touchpoints matter more</td>
+                    <td>Exponential decay</td>
+                </tr>
+                <tr>
+                    <td><code>position</code></td>
+                    <td>First & last touch emphasized</td>
+                    <td>Awareness + conversion focus</td>
+                    <td>U-shaped weighting</td>
+                </tr>
+                <tr>
+                    <td><code>linear</code></td>
+                    <td>Equal credit to all touchpoints</td>
+                    <td>Baseline comparison</td>
+                    <td>Uniform distribution</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2>Advanced Features</h2>
+
+            <h3>Batch Processing</h3>
+            <pre><code>import pandas as pd
+from causalattribution_client import CausalMMAClient
+
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# Process multiple customer journeys at once
+journeys = [
+    {
+        "journey_id": "j1",
+        "touchpoints": pd.DataFrame([...]),
+        "attribution_model": "data_driven"
+    },
+    {
+        "journey_id": "j2",
+        "touchpoints": pd.DataFrame([...]),
+        "attribution_model": "shapley"
+    }
+]
+
+batch_results = client.batch_analyze(journeys, parallel=True)
+
+for result in batch_results:
+    print(f"Journey {result['journey_id']}: {result['attribution_weights']}")</code></pre>
+
+            <h3>Causal Structure Discovery</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# Discover causal relationships using PC algorithm
+data = pd.DataFrame({
+    "age": [25, 30, 35, 40],
+    "income": [50000, 60000, 70000, 80000],
+    "ad_exposure": [1, 0, 1, 1],
+    "conversion": [1, 0, 1, 1]
+})
+
+causal_graph = client.discover_causal_structure(
+    data=data,
+    algorithm="pc",
+    significance_level=0.05
+)
+
+print(causal_graph)
+# Output: DAG showing causal relationships between variables</code></pre>
+
+            <h3>Propensity Score Matching</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# Estimate treatment effect using PSM
+data = pd.DataFrame({
+    "customer_id": ["c1", "c2", "c3", "c4"],
+    "age": [25, 30, 35, 40],
+    "income": [50000, 60000, 70000, 80000],
+    "treatment": [1, 0, 1, 0],  # 1 = saw ad, 0 = didn't see ad
+    "outcome": [100, 80, 120, 85]  # purchase amount
+})
+
+psm_results = client.propensity_score_matching(
+    data=data,
+    treatment_variable="treatment",
+    outcome_variable="outcome",
+    covariates=["age", "income"],
+    caliper=0.1
+)
+
+print(f"Average Treatment Effect: ${psm_results['ate']:.2f}")
+print(f"P-value: {psm_results['p_value']}")</code></pre>
+
+            <h3>Instrumental Variables</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+# Use IV for causal inference when randomization isn't possible
+data = pd.DataFrame({
+    "instrument": [1, 0, 1, 0, 1],  # e.g., random email time
+    "treatment": [1, 0, 1, 1, 0],   # email opened
+    "outcome": [100, 80, 120, 110, 75],  # purchase
+    "confounder": [1, 1, 0, 0, 1]   # user interest
+})
+
+iv_results = client.instrumental_variables(
+    data=data,
+    instrument_variable="instrument",
+    treatment_variable="treatment",
+    outcome_variable="outcome",
+    confounders=["confounder"]
+)
+
+print(f"Causal Effect: {iv_results['causal_effect']:.2f}")
+print(f"First-stage F-statistic: {iv_results['first_stage_f_stat']:.2f}")</code></pre>
+
+            <hr>
+
+            <h2>Data Privacy & Security</h2>
+
+            <div style="background: #f0fdf4; padding: 1.5rem; border-left: 4px solid #059669; margin: 2rem 0;">
+                <h3 style="margin-top: 0; color: #059669;">🔒 100% Local Processing</h3>
+                <ul style="margin: 0;">
+                    <li><strong>Your data never leaves your servers</strong> - All computation happens locally</li>
+                    <li><strong>License validation only</strong> - Control plane only validates license key (no data sent)</li>
+                    <li><strong>Offline mode available</strong> - Set <code>offline_mode=True</code> for air-gapped deployments</li>
+                    <li><strong>HIPAA, GDPR, SOC 2 compliant</strong> - Since data stays local, compliance is simplified</li>
+                </ul>
+            </div>
+
+            <h3>Offline/Air-Gapped Deployment</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+# For environments without internet access
+client = CausalMMAClient(
+    license_key="YOUR_LICENSE_KEY",
+    offline_mode=True  # No license validation calls
+)
+
+# All functionality works exactly the same
+results = client.analyze_attribution(touchpoints, attribution_model="data_driven")</code></pre>
+
+            <hr>
+
+            <h2>Performance</h2>
+
+            <table>
+                <tr>
+                    <th>Dataset Size</th>
+                    <th>Cloud API (Network Transfer)</th>
+                    <th>Local SDK (No Transfer)</th>
+                    <th>Speedup</th>
+                </tr>
+                <tr>
+                    <td>10,000 rows</td>
+                    <td>~500ms</td>
+                    <td>~100ms</td>
+                    <td>5x faster</td>
+                </tr>
+                <tr>
+                    <td>100,000 rows</td>
+                    <td>~5s</td>
+                    <td>~800ms</td>
+                    <td>6x faster</td>
+                </tr>
+                <tr>
+                    <td>1,000,000 rows</td>
+                    <td>~60s</td>
+                    <td>~4s</td>
+                    <td>15x faster</td>
+                </tr>
+                <tr>
+                    <td>10,000,000 rows</td>
+                    <td>Not recommended (transfer time)</td>
+                    <td>~30s</td>
+                    <td>30x+ faster</td>
+                </tr>
+            </table>
+
+            <p><em>* Benchmarks on AWS c5.4xlarge (16 vCPU, 32 GB RAM). GPU acceleration available for datasets > 1M rows.</em></p>
+
+            <hr>
+
+            <h2>Configuration Options</h2>
+
+            <h3>Client Configuration</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+
+client = CausalMMAClient(
+    license_key="YOUR_LICENSE_KEY",
+
+    # Performance
+    use_gpu=True,              # Use GPU acceleration (default: auto-detect)
+    n_jobs=-1,                 # Number of CPU cores (-1 = all cores)
+
+    # Privacy
+    offline_mode=False,        # Disable license validation for air-gapped deployments
+
+    # Control plane
+    control_plane_url="https://api.causalmma.com",  # Control plane endpoint
+    timeout=30,                # License validation timeout (seconds)
+
+    # Logging
+    log_level="INFO"           # DEBUG, INFO, WARNING, ERROR
+)</code></pre>
+
+            <h3>Analysis Options</h3>
+            <pre><code>results = client.analyze_attribution(
+    touchpoints=touchpoints,
+    attribution_model="data_driven",
+
+    options={
+        # Statistical rigor
+        "confidence_interval": 0.95,     # 95% confidence intervals
+        "bootstrap_iterations": 1000,    # For uncertainty estimation
+
+        # Advanced outputs
+        "return_causal_graph": True,     # Return discovered causal DAG
+        "return_diagnostics": True,      # Return model diagnostics
+
+        # Model-specific
+        "shapley_algorithm": "exact",    # exact, monte_carlo, or permutation
+        "psm_caliper": 0.1,             # Caliper for propensity score matching
+        "iv_weak_instrument_threshold": 10  # F-stat threshold for IV
+    }
+)</code></pre>
+
+            <hr>
+
+            <h2>Integration Examples</h2>
+
+            <h3>Integrate with Data Pipeline</h3>
+            <pre><code>import pandas as pd
+from causalattribution_client import CausalMMAClient
+
+# In your ETL pipeline
+def process_daily_attribution(date):
+    client = CausalMMAClient(license_key=os.environ["CAUSALMMA_LICENSE_KEY"])
+
+    # Load data from your data warehouse
+    query = f"""
+        SELECT customer_id, timestamp, channel, conversion, conversion_value
+        FROM touchpoints
+        WHERE DATE(timestamp) = '{date}'
+    """
+    touchpoints = pd.read_sql(query, conn)
+
+    # Run attribution
+    results = client.analyze_attribution(touchpoints, attribution_model="data_driven")
+
+    # Save results back to warehouse
+    results_df = pd.DataFrame(results['attribution_weights'].items(),
+                             columns=['channel', 'attribution_weight'])
+    results_df['date'] = date
+    results_df.to_sql('attribution_results', conn, if_exists='append')
+
+    return results</code></pre>
+
+            <h3>Real-Time Scoring</h3>
+            <pre><code>from causalattribution_client import CausalMMAClient
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+
+@app.route('/score', methods=['POST'])
+def score_journey():
+    data = request.json
+    touchpoints = pd.DataFrame(data['touchpoints'])
+
+    results = client.analyze_attribution(
+        touchpoints=touchpoints,
+        attribution_model="data_driven"
+    )
+
+    return jsonify(results)
+
+if __name__ == '__main__':
+    app.run()</code></pre>
+
+            <hr>
+
+            <h2>Pricing</h2>
+
+            <div style="background: #f9fafb; padding: 2rem; border: 2px solid #e5e7eb; border-radius: 8px; margin: 2rem 0;">
+                <h3 style="margin-top: 0;">SDK Licensing</h3>
+                <p>The SDK requires a separate enterprise license. Pricing is based on:</p>
+                <ul>
+                    <li><strong>Number of servers/instances</strong> running the SDK</li>
+                    <li><strong>Volume of data processed</strong> (rows per month)</li>
+                    <li><strong>Support level</strong> (standard, priority, or dedicated)</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Typical pricing:</strong></p>
+                <ul>
+                    <li><strong>Small deployment</strong> (1-3 servers, &lt; 10M rows/month): $1,500-$3,000/month</li>
+                    <li><strong>Medium deployment</strong> (4-10 servers, 10M-100M rows/month): $3,000-$8,000/month</li>
+                    <li><strong>Enterprise deployment</strong> (10+ servers, 100M+ rows/month): Custom pricing</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-size: 1.1rem;"><strong>Contact us for a quote:</strong> <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></p>
+            </div>
+
+            <hr>
+
+            <h2>Support</h2>
+
+            <table>
+                <tr>
+                    <th>Support Level</th>
+                    <th>Included</th>
+                    <th>Response Time</th>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>Email support, documentation</td>
+                    <td>48 hours</td>
+                </tr>
+                <tr>
+                    <td>Priority</td>
+                    <td>Email + Slack, dedicated support engineer</td>
+                    <td>4 hours</td>
+                </tr>
+                <tr>
+                    <td>Dedicated</td>
+                    <td>24/7 support, dedicated team, custom SLA</td>
+                    <td>1 hour</td>
+                </tr>
+            </table>
+
+            <h3>Contact</h3>
+            <p>📧 Email: <a href="mailto:durai@infinidatum.net">durai@infinidatum.net</a></p>
+            <p>📚 Documentation: <a href="api.html">API Docs</a> | <a href="examples.html">Code Examples</a></p>
+            <p>🐙 GitHub: <a href="https://github.com/rdmurugan/causallm" target="_blank">github.com/rdmurugan/causallm</a></p>
+
+            <hr>
+
+            <h2>FAQ</h2>
+
+            <h3>When should I use the SDK instead of the Cloud API?</h3>
+            <p>Use the SDK if you:</p>
+            <ul>
+                <li>Already have AI infrastructure (GPUs, servers) and want to avoid cloud API costs</li>
+                <li>Have strict data privacy requirements (HIPAA, GDPR, SOC 2)</li>
+                <li>Process massive datasets (10M+ rows regularly) where network transfer is slow</li>
+                <li>Need offline/air-gapped deployment</li>
+            </ul>
+            <p>Otherwise, the Cloud API is more cost-effective ($149-$799/month vs. $1,500+ for SDK).</p>
+
+            <h3>Does the SDK send my data to your servers?</h3>
+            <p><strong>No.</strong> All attribution algorithms run 100% locally on your infrastructure. The only network call is license validation (metadata only, no data). You can also run in <code>offline_mode=True</code> for air-gapped environments.</p>
+
+            <h3>Can I use both the Cloud API and SDK?</h3>
+            <p>Yes! Many customers use the Cloud API for real-time/small workloads and the SDK for batch processing large datasets.</p>
+
+            <h3>What Python versions are supported?</h3>
+            <p>Python 3.8, 3.9, 3.10, 3.11, and 3.12. We recommend Python 3.10+ for best performance.</p>
+
+            <h3>Do I need a GPU?</h3>
+            <p>No, but recommended for datasets > 1M rows. The SDK will auto-detect and use GPU if available. For most use cases, CPU is sufficient.</p>
+
+            <hr>
+
+            <h2>Legal and Compliance</h2>
+
+            <h3>Software License</h3>
+            <p>The SDK is licensed, not sold. By installing and using the SDK, you agree to our <a href="../terms.html">Terms of Service</a>, which include:</p>
+            <ul>
+                <li><strong>Limited License:</strong> Non-exclusive, non-transferable license for the number of servers specified in your agreement</li>
+                <li><strong>No Redistribution:</strong> You may not distribute, sublicense, or share the SDK with third parties</li>
+                <li><strong>Modifications:</strong> You may modify for internal use only</li>
+                <li><strong>License Keys:</strong> Keep your license key confidential; unauthorized sharing may result in termination</li>
+            </ul>
+
+            <h3>Data Privacy</h3>
+            <p>The SDK processes data 100% locally on your infrastructure:</p>
+            <ul>
+                <li><strong>Your Data Stays Local:</strong> Attribution algorithms run entirely on your servers—no customer data is sent to Infinidatum</li>
+                <li><strong>License Validation Only:</strong> The SDK contacts our control plane solely to validate your license (metadata only, no customer data)</li>
+                <li><strong>Offline Mode:</strong> Air-gapped deployments can run without any external network calls</li>
+                <li><strong>Your Compliance Responsibility:</strong> You are responsible for HIPAA, GDPR, SOC 2, and other compliance requirements for data processed on your infrastructure</li>
+            </ul>
+
+            <p>See our <a href="../privacy.html">Privacy Policy</a> for full details on data handling.</p>
+
+            <h3>Warranties and Disclaimers</h3>
+            <p><strong>THE SDK IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND.</strong> Infinidatum does not warrant that the SDK will be error-free, uninterrupted, or suitable for your specific purposes. See our <a href="../terms.html">Terms of Service</a> for full disclaimer.</p>
+
+            <h3>Limitation of Liability</h3>
+            <p>Infinidatum's total liability for all claims related to the SDK shall not exceed the amount you paid for the SDK license in the 12 months preceding the claim. See <a href="../terms.html">Terms of Service</a> for details.</p>
+
+            <h3>Export Compliance</h3>
+            <p>The SDK may be subject to U.S. export control laws. You agree to comply with all applicable export and import laws. You may not use the SDK in embargoed countries or provide access to prohibited parties.</p>
+
+            <h3>Audit Rights</h3>
+            <p>Infinidatum reserves the right to audit your use of the SDK to verify compliance with the license terms. We will provide 30 days' advance notice for audits.</p>
+
+            <hr>
+
+            <div style="text-align: center; padding: 3rem; background: var(--primary-color); color: white; border-radius: 12px; margin: 3rem 0;">
+                <h2 style="color: white; margin-bottom: 1rem;">Ready to Deploy Locally?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Contact us to get your SDK license key and start processing locally.</p>
+                <p style="font-size: 0.95rem; margin-bottom: 2rem; opacity: 0.9;">By requesting SDK access, you agree to our <a href="../terms.html" style="color: white; text-decoration: underline;">Terms of Service</a> and <a href="../privacy.html" style="color: white; text-decoration: underline;">Privacy Policy</a>.</p>
+                <a href="mailto:durai@infinidatum.net" class="button" style="background: white; color: var(--primary-color);">Contact for SDK Access</a>
+                <a href="../index.html#pricing" class="button secondary" style="border-color: white; color: white; margin-left: 1rem;">View Cloud API Pricing</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infinidatum. All rights reserved.</p>
+                <p style="margin-top: 0.5rem;"><a href="../terms.html" style="color: inherit;">Terms of Service</a> | <a href="../privacy.html" style="color: inherit;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

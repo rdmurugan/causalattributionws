@@ -60,8 +60,11 @@
       }
     }
     </script>
+    <link rel="stylesheet" href="../css/cookie-consent.css">
 </head>
 <body>
+    <!-- Cookie Consent Banner -->
+    <script src="../js/cookie-consent.js"></script>
     <header>
         <nav class="container">
             <div class="logo">
@@ -112,49 +115,59 @@
             </ul>
 
             <h3>Install via pip</h3>
-            <pre><code>pip install causalattribution-client</code></pre>
+            <pre><code>pip install causalmma-client</code></pre>
+
+            <p><strong>Alternative:</strong> Install from GitHub (until PyPI publication)</p>
+            <pre><code>pip install git+https://github.com/rdmurugan/causalmma-sdk.git#subdirectory=client</code></pre>
 
             <h3>Verify Installation</h3>
-            <pre><code>python -c "import causalattribution_client; print(causalattribution_client.__version__)"</code></pre>
+            <pre><code>python -c "from causalmma_client import LocalEngine; print('✅ SDK installed successfully')"</code></pre>
 
             <hr>
 
             <h2>Quick Start</h2>
 
             <h3>Initialize the Client</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
+            <pre><code>from causalmma_client import LocalEngine
 
-# Initialize with your license key
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+# Initialize with your API key (production)
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"  # Production control plane
+)
 
 # For offline/air-gapped deployments (no license validation)
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY", offline_mode=True)</code></pre>
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    offline_mode=True
+)</code></pre>
 
             <h3>Basic Attribution Analysis</h3>
             <pre><code>import pandas as pd
-from causalattribution_client import CausalMMAClient
+from causalmma_client import LocalEngine
 
-# Initialize client
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
-
-# Prepare your data
-touchpoints = pd.DataFrame([
-    {"customer_id": "c1", "timestamp": "2025-01-01T10:00:00", "channel": "email", "conversion": 0},
-    {"customer_id": "c1", "timestamp": "2025-01-01T12:00:00", "channel": "facebook", "conversion": 0},
-    {"customer_id": "c1", "timestamp": "2025-01-01T14:00:00", "channel": "paid_search", "conversion": 1, "conversion_value": 150.0}
-])
-
-# Run attribution analysis
-results = client.analyze_attribution(
-    touchpoints=touchpoints,
-    attribution_model="data_driven",
-    options={
-        "confidence_interval": 0.95,
-        "return_causal_graph": True
-    }
+# Initialize engine
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"
 )
 
-print(results)</code></pre>
+# Prepare your data (stays local!)
+df = pd.DataFrame([
+    {"customer_id": "c1", "timestamp": "2025-01-01T10:00:00", "channel": "email", "conversion": 0, "ad_exposure": 1},
+    {"customer_id": "c1", "timestamp": "2025-01-01T12:00:00", "channel": "facebook", "conversion": 0, "ad_exposure": 1},
+    {"customer_id": "c1", "timestamp": "2025-01-01T14:00:00", "channel": "paid_search", "conversion": 1, "conversion_value": 150.0, "ad_exposure": 1}
+])
+
+# Run attribution analysis (100% local execution)
+result = engine.analyze(
+    df=df,
+    model="data_driven",
+    treatment="ad_exposure",
+    outcome="conversion"
+)
+
+print(result["attribution_weights"])</code></pre>
 
             <h4>Response</h4>
             <pre><code>{
@@ -246,99 +259,88 @@ print(results)</code></pre>
 
             <h3>Batch Processing</h3>
             <pre><code>import pandas as pd
-from causalattribution_client import CausalMMAClient
+from causalmma_client import LocalEngine
 
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
-
-# Process multiple customer journeys at once
-journeys = [
-    {
-        "journey_id": "j1",
-        "touchpoints": pd.DataFrame([...]),
-        "attribution_model": "data_driven"
-    },
-    {
-        "journey_id": "j2",
-        "touchpoints": pd.DataFrame([...]),
-        "attribution_model": "shapley"
-    }
-]
-
-batch_results = client.batch_analyze(journeys, parallel=True)
-
-for result in batch_results:
-    print(f"Journey {result['journey_id']}: {result['attribution_weights']}")</code></pre>
-
-            <h3>Causal Structure Discovery</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
-
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
-
-# Discover causal relationships using PC algorithm
-data = pd.DataFrame({
-    "age": [25, 30, 35, 40],
-    "income": [50000, 60000, 70000, 80000],
-    "ad_exposure": [1, 0, 1, 1],
-    "conversion": [1, 0, 1, 1]
-})
-
-causal_graph = client.discover_causal_structure(
-    data=data,
-    algorithm="pc",
-    significance_level=0.05
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"
 )
 
-print(causal_graph)
-# Output: DAG showing causal relationships between variables</code></pre>
+# Process large dataset locally (no network transfer!)
+df = pd.read_csv("large_dataset.csv")  # 10M rows
 
-            <h3>Propensity Score Matching</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
-
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
-
-# Estimate treatment effect using PSM
-data = pd.DataFrame({
-    "customer_id": ["c1", "c2", "c3", "c4"],
-    "age": [25, 30, 35, 40],
-    "income": [50000, 60000, 70000, 80000],
-    "treatment": [1, 0, 1, 0],  # 1 = saw ad, 0 = didn't see ad
-    "outcome": [100, 80, 120, 85]  # purchase amount
-})
-
-psm_results = client.propensity_score_matching(
-    data=data,
-    treatment_variable="treatment",
-    outcome_variable="outcome",
-    covariates=["age", "income"],
-    caliper=0.1
+result = engine.analyze(
+    df=df,
+    model="data_driven",
+    treatment="ad_exposure",
+    outcome="purchase"
 )
 
-print(f"Average Treatment Effect: ${psm_results['ate']:.2f}")
-print(f"P-value: {psm_results['p_value']}")</code></pre>
+# Results computed locally
+print(f"Attribution weights: {result['attribution_weights']}")
+print(f"Processing time: {result.get('execution_time_ms', 'N/A')}ms")</code></pre>
 
-            <h3>Instrumental Variables</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
+            <h3>Quick Analysis Function</h3>
+            <pre><code>from causalmma_client import analyze
+import pandas as pd
 
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+# Quick analysis without explicit engine initialization
+df = pd.read_csv("your_data.csv")
 
-# Use IV for causal inference when randomization isn't possible
-data = pd.DataFrame({
-    "instrument": [1, 0, 1, 0, 1],  # e.g., random email time
-    "treatment": [1, 0, 1, 1, 0],   # email opened
-    "outcome": [100, 80, 120, 110, 75],  # purchase
-    "confounder": [1, 1, 0, 0, 1]   # user interest
-})
-
-iv_results = client.instrumental_variables(
-    data=data,
-    instrument_variable="instrument",
-    treatment_variable="treatment",
-    outcome_variable="outcome",
-    confounders=["confounder"]
+result = analyze(
+    df=df,
+    api_key="ca_live_YOUR_API_KEY",
+    model="shapley",
+    treatment="ad_exposure",
+    outcome="purchase"
 )
 
-print(f"Causal Effect: {iv_results['causal_effect']:.2f}")
-print(f"First-stage F-statistic: {iv_results['first_stage_f_stat']:.2f}")</code></pre>
+print(result)</code></pre>
+
+            <h3>Advanced: Custom Configuration</h3>
+            <pre><code>from causalmma_client import LocalEngine
+import pandas as pd
+
+# Initialize with custom settings
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"
+)
+
+# Large dataset processing
+df = pd.read_csv("10M_rows_dataset.csv")
+
+result = engine.analyze(
+    df=df,
+    model="propensity_score",  # Use PSM model
+    treatment="ad_exposure",
+    outcome="purchase"
+)
+
+print(f"Average Treatment Effect: ${result.get('ate', 0):.2f}")
+print(f"Confidence Interval: {result.get('confidence_interval', {})}")</code></pre>
+
+            <h3>Offline Mode (Air-Gapped Deployment)</h3>
+            <pre><code>from causalmma_client import LocalEngine
+import pandas as pd
+
+# For environments without internet access
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    offline_mode=True  # No license validation, no control plane calls
+)
+
+# All processing happens locally, no network required
+df = pd.read_csv("sensitive_data.csv")
+
+result = engine.analyze(
+    df=df,
+    model="data_driven",
+    treatment="treatment",
+    outcome="outcome"
+)
+
+print(result)</code></pre>
 
             <hr>
 
@@ -410,45 +412,37 @@ results = client.analyze_attribution(touchpoints, attribution_model="data_driven
             <h2>Configuration Options</h2>
 
             <h3>Client Configuration</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
+            <pre><code>from causalmma_client import LocalEngine
 
-client = CausalMMAClient(
-    license_key="YOUR_LICENSE_KEY",
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
 
-    # Performance
-    use_gpu=True,              # Use GPU acceleration (default: auto-detect)
-    n_jobs=-1,                 # Number of CPU cores (-1 = all cores)
+    # Control Plane (Production)
+    control_plane_url="https://ops.causalmma.com",
 
-    # Privacy
-    offline_mode=False,        # Disable license validation for air-gapped deployments
+    # Privacy (Air-gapped deployments)
+    offline_mode=False  # Set to True for air-gapped/offline environments
+)
 
-    # Control plane
-    control_plane_url="https://api.causalmma.com",  # Control plane endpoint
-    timeout=30,                # License validation timeout (seconds)
+# The SDK automatically:
+# - Validates your license with the control plane
+# - Fetches feature flags and permissions
+# - Starts background heartbeat (telemetry)
+# - Processes all data 100% locally (never sent to server)</code></pre>
 
-    # Logging
-    log_level="INFO"           # DEBUG, INFO, WARNING, ERROR
-)</code></pre>
-
-            <h3>Analysis Options</h3>
-            <pre><code>results = client.analyze_attribution(
-    touchpoints=touchpoints,
-    attribution_model="data_driven",
-
-    options={
-        # Statistical rigor
-        "confidence_interval": 0.95,     # 95% confidence intervals
-        "bootstrap_iterations": 1000,    # For uncertainty estimation
-
-        # Advanced outputs
-        "return_causal_graph": True,     # Return discovered causal DAG
-        "return_diagnostics": True,      # Return model diagnostics
-
-        # Model-specific
-        "shapley_algorithm": "exact",    # exact, monte_carlo, or permutation
-        "psm_caliper": 0.1,             # Caliper for propensity score matching
-        "iv_weak_instrument_threshold": 10  # F-stat threshold for IV
-    }
+            <h3>Analysis Models Available</h3>
+            <pre><code># Available models in the SDK:
+result = engine.analyze(
+    df=df,
+    model="data_driven",    # Doubly robust estimation (default, most accurate)
+    # model="shapley",      # Game-theoretic fair attribution
+    # model="propensity_score",  # Propensity score matching
+    # model="instrumental_variables",  # Two-stage least squares
+    # model="time_decay",   # Recency-weighted
+    # model="position",     # First & last touch emphasis
+    # model="linear",       # Equal credit baseline
+    treatment="ad_exposure",
+    outcome="purchase"
 )</code></pre>
 
             <hr>
@@ -456,53 +450,68 @@ client = CausalMMAClient(
             <h2>Integration Examples</h2>
 
             <h3>Integrate with Data Pipeline</h3>
-            <pre><code>import pandas as pd
-from causalattribution_client import CausalMMAClient
+            <pre><code>import os
+import pandas as pd
+from causalmma_client import LocalEngine
 
 # In your ETL pipeline
 def process_daily_attribution(date):
-    client = CausalMMAClient(license_key=os.environ["CAUSALMMA_LICENSE_KEY"])
+    engine = LocalEngine(
+        api_key=os.environ["CAUSALMMA_API_KEY"],
+        control_plane_url="https://ops.causalmma.com"
+    )
 
-    # Load data from your data warehouse
+    # Load data from your data warehouse (stays local!)
     query = f"""
-        SELECT customer_id, timestamp, channel, conversion, conversion_value
+        SELECT customer_id, timestamp, channel, ad_exposure, conversion, conversion_value
         FROM touchpoints
         WHERE DATE(timestamp) = '{date}'
     """
-    touchpoints = pd.read_sql(query, conn)
+    df = pd.read_sql(query, conn)
 
-    # Run attribution
-    results = client.analyze_attribution(touchpoints, attribution_model="data_driven")
+    # Run attribution (100% local processing, no data sent)
+    result = engine.analyze(
+        df=df,
+        model="data_driven",
+        treatment="ad_exposure",
+        outcome="conversion"
+    )
 
     # Save results back to warehouse
-    results_df = pd.DataFrame(results['attribution_weights'].items(),
+    results_df = pd.DataFrame(result['attribution_weights'].items(),
                              columns=['channel', 'attribution_weight'])
     results_df['date'] = date
     results_df.to_sql('attribution_results', conn, if_exists='append')
 
-    return results</code></pre>
+    return result</code></pre>
 
-            <h3>Real-Time Scoring</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
+            <h3>Real-Time Scoring API</h3>
+            <pre><code>from causalmma_client import LocalEngine
 from flask import Flask, request, jsonify
+import pandas as pd
 
 app = Flask(__name__)
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"
+)
 
 @app.route('/score', methods=['POST'])
-def score_journey():
+def score_attribution():
     data = request.json
-    touchpoints = pd.DataFrame(data['touchpoints'])
+    df = pd.DataFrame(data['touchpoints'])
 
-    results = client.analyze_attribution(
-        touchpoints=touchpoints,
-        attribution_model="data_driven"
+    result = engine.analyze(
+        df=df,
+        model="data_driven",
+        treatment=data.get('treatment', 'ad_exposure'),
+        outcome=data.get('outcome', 'conversion')
     )
 
-    return jsonify(results)
+    return jsonify(result)
 
 if __name__ == '__main__':
-    app.run()</code></pre>
+    app.run(host='0.0.0.0', port=8000)</code></pre>
 
             <hr>
 

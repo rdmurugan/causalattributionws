@@ -61,22 +61,25 @@ curl -X POST https://api.causalmma.com/api/v1/attribution \
 ## Quick Start (Local SDK)
 
 ```bash
-pip install causalattribution-client
+pip install causalmma-client
 ```
 
 ```python
-from causalattribution_client import CausalMMAClient
+from causalmma_client import LocalEngine
 import pandas as pd
 
-client = CausalMMAClient(license_key="YOUR_LICENSE_KEY")
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    control_plane_url="https://ops.causalmma.com"
+)
 
-touchpoints = pd.DataFrame([
-    {"customer_id": "c1", "timestamp": "2025-01-01T10:00:00", "channel": "email", "conversion": 0},
-    {"customer_id": "c1", "timestamp": "2025-01-01T12:00:00", "channel": "paid_search", "conversion": 1, "conversion_value": 100}
+df = pd.DataFrame([
+    {"customer_id": "c1", "timestamp": "2025-01-01T10:00:00", "channel": "email", "conversion": 0, "ad_exposure": 1},
+    {"customer_id": "c1", "timestamp": "2025-01-01T12:00:00", "channel": "paid_search", "conversion": 1, "conversion_value": 100, "ad_exposure": 1}
 ])
 
-results = client.analyze_attribution(touchpoints, attribution_model="data_driven")
-print(results)
+result = engine.analyze(df=df, model="data_driven", treatment="ad_exposure", outcome="conversion")
+print(result)
 ```
 
 ## Documentation

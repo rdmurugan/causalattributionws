@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - Consent Mode -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZGTD1T57S"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-DZGTD1T57S');
+      // Set default consent mode (denied until user accepts)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
+
+      gtag('js', new Date());
+      gtag('config', 'G-DZGTD1T57S', {
+        'anonymize_ip': true
+      });
     </script>
 
     <meta charset="UTF-8">
@@ -85,8 +92,11 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cookie-consent.css">
 </head>
 <body>
+    <!-- Cookie Consent Banner -->
+    <script src="js/cookie-consent.js"></script>
     <!-- Header -->
     <header>
         <nav class="container">
@@ -373,7 +383,7 @@
 
                     <h4 style="color: #2563eb; margin-top: 1.5rem;">How SDK Works:</h4>
                     <div style="background: #f0f9ff; padding: 1rem; border-radius: 6px; text-align: left; margin: 1rem 0;">
-                        <p style="margin: 0 0 0.5rem 0;"><strong>1. Install locally:</strong> <code style="background: white; padding: 0.2rem 0.5rem;">pip install causalattribution-client</code></p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong>1. Install locally:</strong> <code style="background: white; padding: 0.2rem 0.5rem;">pip install causalmma-client</code></p>
                         <p style="margin: 0 0 0.5rem 0;"><strong>2. Algorithms run on your machine:</strong> Data stays 100% local</p>
                         <p style="margin: 0 0 0.5rem 0;"><strong>3. Control plane validates license:</strong> Metadata only (no data sent)</p>
                         <p style="margin: 0;"><strong>4. Results computed locally:</strong> 30x faster for large datasets</p>

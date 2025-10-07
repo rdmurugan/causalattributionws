@@ -104,7 +104,7 @@ print(result)
 
 ## Contact
 
-- **Email**: [durai@infinidatum.net](mailto:durai@infinidatum.net)
+- **Email**: [cm-contact@infinidatum.net](mailto:cm-contact@infinidatum.net)
 - **Website**: https://causalmma.com
 - **API Base**: https://api.causalmma.com
 - **GitHub**: https://github.com/rdmurugan/causallm

@@ -354,16 +354,26 @@ print(result)</code></pre>
             </div>
 
             <h3>Offline/Air-Gapped Deployment</h3>
-            <pre><code>from causalattribution_client import CausalMMAClient
+            <pre><code>from causalmma_client import LocalEngine
+import pandas as pd
 
 # For environments without internet access
-client = CausalMMAClient(
-    license_key="YOUR_LICENSE_KEY",
-    offline_mode=True  # No license validation calls
+engine = LocalEngine(
+    api_key="ca_live_YOUR_API_KEY",
+    offline_mode=True  # No license validation, no control plane calls
 )
 
-# All functionality works exactly the same
-results = client.analyze_attribution(touchpoints, attribution_model="data_driven")</code></pre>
+# All processing happens locally, no network required
+df = pd.read_csv("sensitive_data.csv")
+
+result = engine.analyze(
+    df=df,
+    model="data_driven",
+    treatment="treatment",
+    outcome="outcome"
+)
+
+print(result)</code></pre>
 
             <hr>
 

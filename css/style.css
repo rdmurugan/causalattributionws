@@ -60,13 +60,15 @@ h3 {
 
 /* Header/Navigation */
 header {
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.98);
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
 nav {
@@ -114,68 +116,103 @@ nav {
 /* Buttons */
 .button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    padding: 1rem 2rem;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
 }
 
 .button.primary {
     background: var(--primary-color);
     color: white;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
 .button.primary:hover {
     background: #1d4ed8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
 }
 
 .button.secondary {
-    background: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
 }
 
 .button.secondary:hover {
-    background: var(--primary-color);
-    color: white;
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 6rem 0;
+    padding: 8rem 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .hero .subtitle {
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    position: relative;
 }
 
 .hero-cta {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 3rem 0;
+    position: relative;
 }
 
 .code-example {
     background: var(--code-bg);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     margin: 2rem auto;
     max-width: 800px;
     text-align: left;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .code-example pre {
@@ -192,8 +229,8 @@ nav {
 
 /* Problem/Solution Section */
 .problem-solution {
-    padding: 4rem 0;
-    background: var(--bg-light);
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
 }
 
 .comparison {
@@ -205,17 +242,34 @@ nav {
 
 .traditional, .causal {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.traditional:hover, .causal:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.traditional {
+    border-left: 4px solid #dc2626;
 }
 
 .traditional h3 {
     color: #dc2626;
+    font-size: 1.5rem;
+}
+
+.causal {
+    border-left: 4px solid var(--success-color);
 }
 
 .causal h3 {
     color: var(--success-color);
+    font-size: 1.5rem;
 }
 
 .comparison ul {
@@ -229,12 +283,15 @@ nav {
 
 /* Features Section */
 .features {
-    padding: 4rem 0;
+    padding: 6rem 0;
+    background: white;
 }
 
 .features h2 {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
+    color: var(--text-dark);
 }
 
 .feature-grid {
@@ -244,20 +301,25 @@ nav {
 }
 
 .feature {
-    background: var(--bg-light);
-    padding: 2rem;
-    border-radius: 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .feature:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+    border-color: var(--primary-color);
 }
 
 .feature h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .feature ul {
@@ -272,18 +334,24 @@ nav {
 
 /* Pricing Section */
 .pricing {
-    padding: 4rem 0;
-    background: var(--bg-light);
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
     text-align: center;
+}
+
+.pricing h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .pricing-formula {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 12px;
     margin: 2rem auto;
     max-width: 600px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--border-color);
 }
 
 .formula {
@@ -302,21 +370,30 @@ nav {
 
 .pricing-tier {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 16px;
     border: 2px solid var(--border-color);
     position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .pricing-tier:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
 }
 
 .pricing-tier.featured {
     border-color: var(--primary-color);
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.25);
+    background: linear-gradient(to bottom, white 0%, #f8faff 100%);
+    transform: scale(1.05);
+}
+
+.pricing-tier.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.3);
 }
 
 .badge {
@@ -372,12 +449,14 @@ nav {
 
 /* Use Cases */
 .use-cases {
-    padding: 4rem 0;
+    padding: 6rem 0;
+    background: white;
 }
 
 .use-cases h2 {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
 }
 
 .use-case-grid {
@@ -388,25 +467,35 @@ nav {
 
 .use-case {
     background: var(--bg-light);
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 12px;
     text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.use-case:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-color);
 }
 
 .use-case h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 /* Quick Start */
 .quick-start {
-    padding: 4rem 0;
-    background: var(--bg-light);
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
 }
 
 .quick-start h2 {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
 }
 
 .steps {
@@ -418,23 +507,33 @@ nav {
 
 .step {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 12px;
     text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-color);
 }
 
 .step-number {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
     color: white;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .quick-start-cta {
@@ -445,12 +544,14 @@ nav {
 
 /* Documentation Links */
 .documentation-links {
-    padding: 4rem 0;
+    padding: 6rem 0;
+    background: white;
 }
 
 .documentation-links h2 {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
 }
 
 .doc-grid {
@@ -461,24 +562,27 @@ nav {
 
 .doc-card {
     background: var(--bg-light);
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 12px;
     text-decoration: none;
     color: var(--text-dark);
-    transition: all 0.3s;
-    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .doc-card:hover {
     background: white;
     border-color: var(--primary-color);
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
 }
 
 .doc-card h3 {
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .doc-card p {
@@ -487,14 +591,28 @@ nav {
 
 /* Contact Section */
 .contact {
-    padding: 4rem 0;
+    padding: 6rem 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
 }
 
 .contact h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    position: relative;
 }
 
 .contact-info {
